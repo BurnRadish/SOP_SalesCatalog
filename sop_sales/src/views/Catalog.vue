@@ -34,10 +34,12 @@
     </div>
     <!-- Catalog -->
     <h1>รายการสินค้า</h1>
-    <div style="background-color: red" class="mb-3">
+    <div class="mb-3">
       <b-row>
         <b-col v-for="(n, index) in 10" :key="index" cols="3" class="mb-2">
           <b-card
+            v-b-tooltip.hover.right="'พบกับความน่ารักของ Siba inu ได้ที่งาน Shiba World'"
+            border-variant=""
             title="Shiba Inu"
             img-src="https://cdn.pixabay.com/photo/2018/10/04/19/46/dog-3724261_960_720.jpg"
             img-alt="Image"
@@ -47,7 +49,9 @@
               Shiba inu, เป็นหมาน้อยสุดน่ารักชนิดหนึ่งถิ่นกำเนิดอยู่ที่ญี่ปุ่น
             </b-card-text>
 
-            <b-button href="#" variant="primary">Go somewhere</b-button>
+            <b-card-text :class="'text-danger'">
+              20000฿
+            </b-card-text>
           </b-card>
         </b-col>
       </b-row>
@@ -58,6 +62,14 @@
 <script>
 export default {
   name: "Catalog",
+  data() {
+      return {
+        
+      }
+    },
+    methods: {
+
+    }
 };
 </script>
 
