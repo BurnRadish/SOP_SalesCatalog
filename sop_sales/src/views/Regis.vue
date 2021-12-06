@@ -46,12 +46,4 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.login{
-    background-color: #ee4d2d;
-    border-color: #ee4d2d;
-    color: white;
-}
-.login:hover{
-    background-color: #ee2900;
-}
 </style>

@@ -85,4 +85,23 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.regis{
+    background-color:white; 
+    color: black;
+    border-color: #ee4d2d;
+}
+.regis:hover{
+    background-color: #ee4d2d;
+    color: white;
+    border-color: #ee4d2d;
+}
+.login{
+    background-color: #ee4d2d;
+    border-color: #ee4d2d;
+    color: white;
+}
+.login:hover{
+    background-color: #ee2900;
+}
+</style>
