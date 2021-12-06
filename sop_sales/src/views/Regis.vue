@@ -23,34 +23,7 @@
             </center>
           </b-col>
           <b-col cols="5" class="mt-5">
-            <b-card title="เข้าสู่ระบบ" style="max-width: 25rem" class="mb-2">
-              <b-card-text class="mt-3">
-                <b-form @submit.stop.prevent>
-                  <label for="text-username">Username</label>
-                  <b-form-input
-                    type="text"
-                    id="text-username"
-                    placeholder="Enter your username"
-                  ></b-form-input>
-
-                  <label for="text-password" class="mt-3">Password</label>
-                  <b-form-input
-                    type="password"
-                    id="text-password"
-                    placeholder="Enter your password"
-                  ></b-form-input>
-
-                  <label for="text-conpassword" class="mt-3">Confirm Password</label>
-                  <b-form-input
-                    type="password"
-                    id="text-conpassword"
-                    placeholder="Enter your password again"
-                  ></b-form-input>
-                </b-form>
-              </b-card-text>
-
-              <b-button href="#" variant="primary" class="w-100 mt-3 login">Confirm</b-button>
-            </b-card>
+            <Card :regis="true"></Card>
           </b-col>
         </b-row>
       </div>
@@ -59,7 +32,12 @@
 </template>
 
 <script>
-export default {};
+import Card from "../components/Card.vue"
+export default {
+    components:{
+        Card
+    }
+};
 </script>
 
 <style>
