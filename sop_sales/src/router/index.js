@@ -5,6 +5,16 @@ Vue.use(VueRouter)
 
 const routes = [
     {
+        path: '/',
+        name: 'Login',
+        component: () => import('../views/Login.vue')
+    },
+    {
+        path: '/register',
+        name: 'Regis',
+        component: () => import('../views/Regis.vue')
+    },
+    {
         path: '/Catalog',
         name: 'Catalog',
         component: () => import('../views/Catalog.vue')
