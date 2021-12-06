@@ -4,7 +4,7 @@
       title="เข้าสู่ระบบ"
       style="max-width: 25rem"
       class="mb-2 mt-5"
-      v-if="conPass === false">
+      v-if="regis === false">
       <b-card-text class="mt-3">
         <b-form @submit.stop.prevent>
           <label for="text-username">Username</label>
@@ -38,12 +38,12 @@
       <center class="mt-2">
         <b-form-text
           >ลืมรหัสผ่านงั้นหรอ
-          <a href="/register" style="text-decoration: none; color: #ee4d2d">สมัครใหม่</a>สิ555555</b-form-text
+          <a href="/register" style="text-decoration: none; color: #ee4d2d">สมัครใหม่</a> สิ555555</b-form-text
         >
       </center>
     </b-card>
 
-    <b-card title="เข้าสู่ระบบ" style="max-width: 25rem" class="mb-2" v-else>
+    <b-card title="สมัครสมาชิก" style="max-width: 25rem" class="mb-2 mt-5" v-else>
       <b-card-text class="mt-3">
         <b-form @submit.stop.prevent>
           <label for="text-username">Username</label>
@@ -80,9 +80,7 @@
 export default {
   name: "Card",
   props: {
-    username: String,
-    password: String,
-    conPass: String,
+    regis: Boolean,
   },
 };
 </script>
