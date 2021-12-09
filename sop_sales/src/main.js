@@ -6,6 +6,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import router from './router/index'
 import { VBHoverPlugin } from 'bootstrap-vue'
 import { VBTooltipPlugin } from 'bootstrap-vue'
+import { BadgePlugin } from 'bootstrap-vue'
 
 Vue.config.productionTip = false
 
@@ -14,7 +15,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VBHoverPlugin)
 Vue.use(VBTooltipPlugin)
-
+Vue.use(BadgePlugin)
 
 new Vue({
   router,
