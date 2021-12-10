@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import Card from "../components/Card.vue"
+import Card from "../components/InputCard.vue"
 export default {
-    components: {
+  components: {
         Card
   }
 };
