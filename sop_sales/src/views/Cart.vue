@@ -21,7 +21,7 @@
                             <b-card-text :class="'text-danger'">
                             500฿
                             </b-card-text>
-                            <b-button href="#" variant="primary">Go somewhere <b-icon icon="cart-check"> </b-icon></b-button>
+                            <b-button href="#" variant="primary">Chect OUT  <b-icon icon="cart-check"> </b-icon></b-button>
                             </b-card>
                         </b-col>
                     </b-row>
