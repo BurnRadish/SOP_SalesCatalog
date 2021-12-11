@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-        <b-navbar toggleable="lg" type="dark" variant="info">
+  <b-navbar toggleable="lg" type="dark" variant="info" v-if="$route.name !== 'Login' && $route.name !== 'Regis' && $route.name !== 'Checkout'">
     <b-navbar-brand href="#">NavBar</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -37,8 +37,7 @@
     </b-collapse>
   </b-navbar>
 
-
-    <router-view :key="$route.fullPath" />
+  <router-view :key="$route.fullPath" />
 
   </div>
 </template>
