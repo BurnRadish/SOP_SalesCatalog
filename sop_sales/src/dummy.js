@@ -1,6 +1,6 @@
 //ข้อมูลสินค้า
 
-STOCK = [
+let STOCK = [
     {
         id : 1,
         name : "เสื้อยืด GOS FreeSize",
@@ -129,4 +129,4 @@ STOCK = [
     },
 ]
 
-
+export default STOCK;
