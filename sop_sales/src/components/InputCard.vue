@@ -12,6 +12,7 @@
             type="text"
             id="text-username"
             placeholder="Enter your username"
+            v-model="email"
           ></b-form-input>
 
           <label for="text-password" class="mt-3">Password</label>
@@ -19,11 +20,12 @@
             type="password"
             id="text-password"
             placeholder="Enter your password"
+            v-model="password"
           ></b-form-input>
         </b-form>
       </b-card-text>
 
-      <b-button href="#" class="w-100 mt-3 login">Sign In</b-button>
+      <b-button href="#" class="w-100 mt-3 login" @click="login">Sign In</b-button>
       <b-row class="mt-3">
         <b-col cols="5"><hr /></b-col>
         <b-col>หรือ</b-col>
@@ -51,6 +53,7 @@
             type="text"
             id="text-username"
             placeholder="Enter your username"
+            v-model="email"
           ></b-form-input>
 
           <label for="text-password" class="mt-3">Password</label>
@@ -58,6 +61,7 @@
             type="password"
             id="text-password"
             placeholder="Enter your password"
+            v-model="password"
           ></b-form-input>
 
           <label for="text-conpassword" class="mt-3">Confirm Password</label>
@@ -69,7 +73,7 @@
         </b-form>
       </b-card-text>
 
-      <b-button href="#" variant="primary" class="w-100 mt-3 login"
+      <b-button href="#" variant="primary" class="w-100 mt-3 login" @click="register"
         >Confirm</b-button
       >
     </b-card>
@@ -77,11 +81,35 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Card",
   props: {
     regis: Boolean,
   },
+  data(){
+    return{
+      email:'',
+      password:'',
+    }
+  },
+  methods:{
+    login(){
+      axios
+          .post('http://localhost:9004/auth/login', { email: this.email, password: this.password})
+          .then((res) => {
+            localStorage.setItem("Token", res.data.accessToken)
+            console.log(res)
+          })
+    },
+    register(){
+      axios
+          .post('http://localhost:9004/auth/register', { email: this.email, password: this.password})
+          .then((res) => {
+            console.log(res.data.success)
+          })
+    }
+  }
 };
 </script>
 

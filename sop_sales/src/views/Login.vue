@@ -33,10 +33,12 @@
 
 <script>
 import Card from "../components/InputCard.vue"
+
 export default {
   components: {
         Card
-  }
+  },
+  
 };
 </script>
 
