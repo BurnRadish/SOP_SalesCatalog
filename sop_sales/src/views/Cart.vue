@@ -4,6 +4,7 @@
                 <h1>This is Cart</h1>
                 <div>
                     <b-row>
+                        <b-button href="#" variant="primary"> Chect OUT  <b-icon icon="cart-check"> </b-icon></b-button>
                         <b-col
                         v-for="(item, index) in Stock" 
                         :key="index" 
@@ -36,10 +37,9 @@
                                 <b-card-text :class="'text-danger mb-2'">
                                 {{ item.price }}฿
                                 </b-card-text>
-                                <b-button href="#" variant="primary">Chect OUT  <b-icon icon="cart-check"> </b-icon></b-button>
                             </b-card>
-
                         </b-col>
+                         
                     </b-row>
                     
                 </div>
@@ -56,8 +56,7 @@ export default {
             //ลอง render
             Stock: STOCK,
             // Real Cart
-            products:[],
-            cart:null,
+            cart:[],
 
 
         }

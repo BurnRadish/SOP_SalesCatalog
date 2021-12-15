@@ -196,6 +196,7 @@ export default {
   },
   mounted(){
     this.getStock()
+    localStorage.setItem("Product",JSON.stringify([]))
   }
   ,
   methods:{

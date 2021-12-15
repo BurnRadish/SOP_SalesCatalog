@@ -35,7 +35,7 @@
                 <p style="font-size: 20px; color:#b5b5b5">
                     จำนวนคงเหลือ : {{productDetail.quantity}}
                 </p>
-                <b-button variant="warning" >
+                <b-button variant="warning"  @click="addtoCart">
                     <b-icon icon="cart-plus-fill" font-scale="1.5">
                         
                     </b-icon>
@@ -56,10 +56,23 @@ export default {
     return {
         amount: 0,
         productDetail : {},
+        Arrcart:{},
+        objCart:[],
+        Cart: null
     };
+  },
+  mounted() {
+    if (localStorage.getItem('Products')){
+      try {
+        this.objCart = JSON.parse(localStorage.getItem('Products'));
+      } catch(e){
+        localStorage.removeItem('cats');
+      }
+    }
   },
   created(){
     this.getProductDetail(this.$route.params.id);
+    
   },
   methods:{
       setAmount : function(how){
@@ -84,6 +97,32 @@ export default {
       },
       goBack(){
         this.$router.push({ path: `/Catalog` });
+      },
+      addtoCart(){
+        if(!this.Cart) {
+          this.Cart = {
+          Products: this.productDetail,
+          Amounts: this.amount};
+          return;
+        }
+        this.objCart.push(this.Cart);
+        
+        this.saveCart();
+        // // let i = []
+        // this.objCart = JSON.parse(localStorage.getItem("Product"))
+        // this.Arrcart = {
+        //   Product:this.productDetail,
+        //   Amount :this.amount
+        // }
+        // // i.push(this.Arrcart)
+        // this.objCart.push(this.Arrcart)
+        // console.log("Hello world "+ JSON.stringify(this.productDetail))
+        // localStorage.setItem("Product", JSON.stringify(this.objCart))
+        // // this.objCart = localStorage.getItem("Product")
+      },
+      saveCart(){
+        const parsed = JSON.stringify(this.objCart);
+        localStorage.setItem('Products', parsed)
       }
   },
 };
