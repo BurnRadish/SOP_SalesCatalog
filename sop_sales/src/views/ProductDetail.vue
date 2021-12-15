@@ -35,7 +35,7 @@
                 <p style="font-size: 20px; color:#b5b5b5">
                     จำนวนคงเหลือ : {{productDetail.quantity}}
                 </p>
-                <b-button variant="warning">
+                <b-button variant="warning" >
                     <b-icon icon="cart-plus-fill" font-scale="1.5">
                         
                     </b-icon>
