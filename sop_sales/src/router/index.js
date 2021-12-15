@@ -20,7 +20,7 @@ const routes = [
         component: () => import('../views/Catalog.vue')
     },
     {
-        path: '/Detail',
+        path: '/Detail/:id',
         name: 'Detail',
         component: () => import('../views/ProductDetail.vue')
     },    

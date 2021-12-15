@@ -27,6 +27,13 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
+    @CrossOrigin(origins = "http://localhost:8080")
+    @RequestMapping(value = "/productDetail/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getProductDetail(@PathVariable("id") String id) {
+        Product product = productService.getProductId(id);
+        return ResponseEntity.ok(product);
+    }
+
     //update quantity
     @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value = "/product/updateQ/{id}/{quantity}", method = RequestMethod.GET)
