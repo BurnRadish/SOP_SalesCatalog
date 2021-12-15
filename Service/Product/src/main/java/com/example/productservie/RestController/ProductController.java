@@ -31,19 +31,51 @@ public class ProductController {
 
     //update quantity
     @RequestMapping(value = "/product/updateQ/{id}/{quantity}", method = RequestMethod.GET)
-    public ResponseEntity<?> updateProductQuantity(@PathVariable("id") String id, @PathVariable("quantity") int quantity) {
+    public String updateProductQuantity(@PathVariable("id") String id, @PathVariable("quantity") int quantity) {
         Product product = productService.getProductId(id);
-        product.setQuantity(quantity);
-        productService.updateProduct(product);
-        return ResponseEntity.ok(product);
+        if (product != null){
+            product.setQuantity(quantity);
+            productService.updateProduct(product);
+            return "Update product quantity complete";
+        }
+        else {
+            return "Product not found";
+        }
+
     }
 
     //update price
     @RequestMapping(value = "/product/updateP/{id}/{price}", method = RequestMethod.GET)
-    public ResponseEntity<?> updateProductPrice(@PathVariable("id") String id, @PathVariable("price") int price) {
+    public String updateProductPrice(@PathVariable("id") String id, @PathVariable("price") int price) {
         Product product = productService.getProductId(id);
-        product.setPrice(price);
-        productService.updateProduct(product);
-        return ResponseEntity.ok(product);
+        if (product != null){
+            product.setPrice(price);
+            productService.updateProduct(product);
+            return "Update product price complete";
+        }
+        else {
+            return "Product not found";
+        }
+
+
+    }
+
+    @RequestMapping(value = "/create/{name}/{description}/{quantity}/{price}/{Urlimage}/{group}", method = RequestMethod.POST)
+    public ResponseEntity<?> createProduct(@PathVariable("name") String name,
+                                            @PathVariable("description") String description,
+                                            @PathVariable("quantity") int quantity,
+                                            @PathVariable("price") int price,
+                                            @PathVariable("Urlimage") String Urlimage,
+                                            @PathVariable("group") String group) {
+        //null เพื่อ trigger id จะได้สร้างตัวใหม่
+        Product newProduct = productService.createProduct(new Product(null, name, description, quantity, price, Urlimage, group));
+        return ResponseEntity.ok(newProduct);
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public String deleteBook(@PathVariable("id") String id) {
+        Product product = productService.getProductId(id);
+        productService.deleteProduct(product);
+        return "Delete product id : "+ id + " complete";
     }
 }
