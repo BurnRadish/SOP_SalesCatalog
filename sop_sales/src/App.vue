@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-  <b-navbar toggleable="lg" type="dark" variant="info" v-if="$route.name !== 'Login' && $route.name !== 'Regis' && $route.name !== 'Checkout'&& $route.name !== 'History'&& $route.name !== 'HistoryDetail'">
+  <!--<b-navbar toggleable="lg" type="dark" variant="info" v-if="$route.name !== 'Login' && $route.name !== 'Regis' && $route.name !== 'Checkout'&& $route.name !== 'History'&& $route.name !== 'HistoryDetail'">
     <b-navbar-brand href="#">NavBar</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -11,7 +11,7 @@
         <b-nav-item href="#" disabled>Disabled</b-nav-item>
       </b-navbar-nav>
 
-      <!-- Right aligned nav items -->
+
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
           <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
@@ -26,7 +26,7 @@
         </b-nav-item-dropdown>
 
         <b-nav-item-dropdown right>
-          <!-- Using 'button-content' slot -->
+
           <template #button-content>
             <em>User</em>
           </template>
@@ -35,7 +35,7 @@
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
-  </b-navbar>
+  </b-navbar>-->
 
   <router-view :key="$route.fullPath" />
 
