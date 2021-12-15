@@ -33,7 +33,7 @@
 export default {
   name: "ItemsList",
   props: {
-    data: Object
+    data: Array
   },
 };
 </script>
