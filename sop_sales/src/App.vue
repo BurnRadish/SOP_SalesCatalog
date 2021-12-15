@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-  <b-navbar toggleable="lg" type="dark" variant="info" v-if="$route.name !== 'Login' && $route.name !== 'Regis' && $route.name !== 'Checkout'">
+  <b-navbar toggleable="lg" type="dark" variant="info" v-if="$route.name !== 'Login' && $route.name !== 'Regis' && $route.name !== 'Checkout'&& $route.name !== 'History'&& $route.name !== 'HistoryDetail'">
     <b-navbar-brand href="#">NavBar</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
