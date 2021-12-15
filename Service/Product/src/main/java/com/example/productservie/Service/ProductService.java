@@ -22,4 +22,12 @@ public class ProductService {
     public List<Product> retrieveProductByName(String name) {
         return repository.findByByRegexpName(name);
     }
+
+    public Product getProductId(String id){
+        return repository.findBy_id(id);
+    }
+
+    public Product updateProduct(Product product){
+        return repository.save(product);
+    }
 }

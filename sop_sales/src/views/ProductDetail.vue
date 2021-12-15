@@ -5,6 +5,11 @@
     style="overflow: hidden;padding-top:20px"
   >
     <div class="mb-3" style="background: #ffff">
+      <b-button size="lg"  class="mb-2">
+        <b-icon animation="cylon" icon="box-arrow-in-left" aria-hidden="true">
+        </b-icon>
+        Go back
+      </b-button>
         <b-row>
             <b-col cols="4">
                 <b-img thumbnail fluid src="https://cdn.pixabay.com/photo/2018/10/04/19/46/dog-3724261_960_720.jpg" alt="Image 1">
@@ -31,7 +36,7 @@
                     จำนวนคงเหลือ : 9999
                 </p>
                 <b-button variant="warning">
-                    <b-icon icon="cart-plus-fill">
+                    <b-icon icon="cart-plus-fill" font-scale="1.5">
                         
                     </b-icon>
                     <span>เพิ่มลงตะกร้าสินค้า</span>

@@ -28,4 +28,22 @@ public class ProductController {
         List<Product> product = productService.retrieveProductByName(name);
         return ResponseEntity.ok(product);
     }
+
+    //update quantity
+    @RequestMapping(value = "/product/updateQ/{id}/{quantity}", method = RequestMethod.GET)
+    public ResponseEntity<?> updateProductQuantity(@PathVariable("id") String id, @PathVariable("quantity") int quantity) {
+        Product product = productService.getProductId(id);
+        product.setQuantity(quantity);
+        productService.updateProduct(product);
+        return ResponseEntity.ok(product);
+    }
+
+    //update price
+    @RequestMapping(value = "/product/updateP/{id}/{price}", method = RequestMethod.GET)
+    public ResponseEntity<?> updateProductPrice(@PathVariable("id") String id, @PathVariable("price") int price) {
+        Product product = productService.getProductId(id);
+        product.setPrice(price);
+        productService.updateProduct(product);
+        return ResponseEntity.ok(product);
+    }
 }
