@@ -28,14 +28,58 @@
           <b-input-group class="mt-3">
             <b-form-input
               placeholder="ใส่ชื่อสินค้าที่ต้องการค้นหาที่นี้"
+              v-model="searchHolder"
             ></b-form-input>
             <b-input-group-append>
-              <b-button variant="warning"><b-icon icon="search" /></b-button>
+              <b-button variant="warning" @click="searchStock()"><b-icon icon="search" /></b-button>
             </b-input-group-append>
           </b-input-group>
         </b-col>
       </b-row>
     </div>
+    <!-- search result -->
+    <div class="mb-3" v-show="search">
+      <b-row>
+        <b-col
+                v-for="(item, index) in SearchResult"
+                :key="index"
+                cols="3"
+                class="mb-2"
+              >
+                <b-card
+                  v-b-tooltip.hover.right="{ title: item.description }"
+                  border-variant=""
+                  style="height: 100%; cursor:pointer;"
+                >
+                  <b-card-body style="height: 80%">
+                    <b-card-img
+                      :src="'https://'+item.urlimage"
+                      img-alt="Card image"
+                      img-top
+                      alt="Image"
+                      height="200"
+                      class="mb-2"
+                    >
+                    </b-card-img>
+                    <b-card-title>
+                      {{ item.name }}
+                    </b-card-title>
+                    <b-card-text class="mb-2">
+                      {{ item.description }}
+                    </b-card-text>
+                  </b-card-body>
+
+                  <b-card-body>
+                    <b-card-text :class="'text-danger mb-2'">
+                      {{ item.price }}฿
+                    </b-card-text>
+                    <a href="#" class="card-link">ดูรายละเอียดเพิ่มเติม</a>
+                  </b-card-body>
+                </b-card>
+              </b-col>
+      </b-row>
+    </div>
+    
     <!-- Catalog -->
     <div
       style="
@@ -47,7 +91,6 @@
     >
       <h2>รายการสินค้า</h2>
     </div>
-
     <div class="mb-3">
       <b-card no-body>
         <b-tabs card justified active-nav-item-class="text-warning">
@@ -135,33 +178,6 @@
           </b-tab>
         </b-tabs>
       </b-card>
-      <!-- <b-row>
-        <b-col
-          v-for="(item, index) in dummyStock"
-          :key="index"
-          cols="3"
-          class="mb-2"
-        >
-          <b-card
-            v-b-tooltip.hover.right="{ title: item.shop }"
-            border-variant=""
-            img-src="https://cdn.pixabay.com/photo/2018/10/04/19/46/dog-3724261_960_720.jpg"
-            img-alt="Image"
-            img-top
-          >
-            <b-card-title>
-              {{ item.name }}
-            </b-card-title>
-            <b-card-text>
-              {{ item.description }}
-            </b-card-text>
-
-            <b-card-text :class="'text-danger'">
-              {{ item.price }}
-            </b-card-text>
-          </b-card>
-        </b-col>
-      </b-row> -->
     </div>
   </b-container>
 </template>
@@ -173,6 +189,9 @@ export default {
     return {
       Cloths: [],
       Accessories: [],
+      SearchResult: [],
+      search: false,
+      searchHolder: '',
     };
   },
   mounted(){
@@ -189,6 +208,19 @@ export default {
       .catch((err)=>{
         console.log(err)
       })
+    },
+    searchStock(){
+      if(this.searchHolder != ''){
+        axios.get("http://localhost:4000/product/" + this.searchHolder)
+        .then((res)=>{
+          console.log(res.data)
+          this.SearchResult = res.data
+          this.search = true
+        }).catch((err)=>{
+          console.log(err)
+        })
+      }
+      
     }
   }
 };
