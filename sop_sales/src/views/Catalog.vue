@@ -73,7 +73,7 @@
                     <b-card-text :class="'text-danger mb-2'">
                       {{ item.price }}฿
                     </b-card-text>
-                    <a href="#" class="card-link">ดูรายละเอียดเพิ่มเติม</a>
+                    <a class="card-link" @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม</a>
                   </b-card-body>
                 </b-card>
               </b-col>
@@ -129,7 +129,7 @@
                     <b-card-text :class="'text-danger mb-2'">
                       {{ item.price }}฿
                     </b-card-text>
-                    <a href="#" class="card-link">ดูรายละเอียดเพิ่มเติม</a>
+                    <a class="card-link" @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม</a>
                   </b-card-body>
                 </b-card>
               </b-col>
@@ -170,7 +170,7 @@
                     <b-card-text :class="'text-danger mb-2'">
                       {{ item.price }}฿
                     </b-card-text>
-                    <a href="#" class="card-link">ดูรายละเอียดเพิ่มเติม</a>
+                    <a class="card-link" @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม</a>
                   </b-card-body>
                 </b-card>
               </b-col>
@@ -220,7 +220,9 @@ export default {
           console.log(err)
         })
       }
-      
+    },
+    viewDetail(id) {
+      this.$router.push({ path: `/Detail/${id}` });
     }
   }
 };

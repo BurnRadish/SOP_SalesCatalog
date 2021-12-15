@@ -37,9 +37,6 @@ public class HistoryService {
             MongoDatabase database = mongoClient.getDatabase("Account");
             MongoCollection<Document> collection = database.getCollection("History");
             Document doc = collection.find(and(eq("email", historyRequest.getEmail()), eq("orderId", id))).first();
-            System.out.println(historyRequest.getEmail());
-            System.out.println(id);
-            System.out.println(doc);
             return new HistoryDetailResponse(doc);
         }
     }

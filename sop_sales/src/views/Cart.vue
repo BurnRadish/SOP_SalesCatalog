@@ -1,28 +1,44 @@
 <template>
 <!-- ตะกร้า -->
         <b-container fluid="xl">
-                <h1>Hello world</h1>
-                <h2>Cart</h2>
+                <h1>This is Cart</h1>
                 <div>
                     <b-row>
-                        <b-col v-for="(n,index) in 10" :key="index" cols="2" class="mb-3">
+                        <b-col
+                        v-for="(item, index) in Stock" 
+                        :key="index" 
+                        cols="3" 
+                        class="mb-2">
                             <b-card
-                            title="มังคุด"
-                            img-src="https://xn--42cf4bmgda2bxzc3nlh5a2d2rncd.com/wp-content/uploads/2020/04/4-1.jpg"
-                            img-alt="Image"
-                            img-top
-                            tag="article"
-                            style="max-width: 20rem;"
-                            class="mb-2"
-                            >
-                            <b-card-text>
-                            มังคุดอร่อยๆ
-                            </b-card-text>
-                            <b-card-text :class="'text-danger'">
-                            500฿
-                            </b-card-text>
-                            <b-button href="#" variant="primary">Chect OUT  <b-icon icon="cart-check"> </b-icon></b-button>
+                                v-b-tooltip.hover.right="{title: item.description}"
+                                style="height: 100%"
+                                >
+                                <b-card-img
+                                :src="item.Urlimage"
+                                img-alt="Card image"
+                                img-top 
+                                alt="Image"
+                                height="200"
+                                tag="article"
+                                class="mb-2">
+                                </b-card-img>
+                            <div style="height: 150px; padding-top: 10px">
+                                <b-card-title style="height: 50px">
+                                {{ item.name }}
+                                </b-card-title>
+                                <b-card-text
+                                class="mb-2"
+                                style="height: 50px; padding-top: 10px"
+                                >
+                                {{ item.description }}
+                                </b-card-text>
+                            </div>
+                                <b-card-text :class="'text-danger mb-2'">
+                                {{ item.price }}฿
+                                </b-card-text>
+                                <b-button href="#" variant="primary">Chect OUT  <b-icon icon="cart-check"> </b-icon></b-button>
                             </b-card>
+
                         </b-col>
                     </b-row>
                     
@@ -31,10 +47,18 @@
 </template>
 
 <script>
+import STOCK from "../dummy";
+
 export default {
     name:"Cart",
     data() {
         return{
+            //ลอง render
+            Stock: STOCK,
+            // Real Cart
+            products:[],
+            cart:null,
+
 
         }
     },
