@@ -33,6 +33,16 @@ const routes = [
         path: '/checkout',
         name: 'Checkout',
         component: () => import('../views/Checkout.vue')
+    },
+    {
+        path: '/history',
+        name: 'History',
+        component: () => import('../views/History.vue')
+    },
+    {
+        path: '/history/:id',
+        name: 'HistoryDetail',
+        component: () => import('../views/HistoryDetail.vue')
     }
 ]
 
