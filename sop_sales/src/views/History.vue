@@ -18,13 +18,15 @@
                         <b-row>
                             <b-col cols="6"><strong>หมายเลขออเดอร์</strong></b-col>
                             <b-col cols="3"><strong>ราคารวม</strong></b-col>
-                            <b-col cols="3"><strong>สถานะ</strong></b-col>
+                            <b-col cols="3"><strong style="float:right;margin-right:15%" >สถานะ</strong></b-col>
                         </b-row>
-                        <b-row class="mt-5" v-for="(item) in data" :key="item.id">
-                            <b-col cols="6"><a :href='"/history/" + item.order_id' >No.{{item.order_id}}</a></b-col>
-                            <b-col cols="3">{{item.price}}</b-col>
-                            <b-col cols="3">สำเร็จ</b-col>
-                        </b-row>
+                        <div v-for="(items, i) in data" :key="i">
+                            <b-row class="mt-5" v-for="(item, j) in items" :key="j">
+                                <b-col cols="6"><a :href='"/history/"+ item.orderId ' >No.{{item.orderId}}</a></b-col>
+                                <b-col cols="3">{{item.total}}</b-col>
+                                <b-col cols="3"><p style="float:right;margin-right:15%">สำเร็จ</p></b-col>
+                            </b-row>
+                        </div>
                     </div>
                     </b-media>
                 </b-card>
@@ -34,19 +36,27 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     data(){
         return{
-            data:[
-                {
-                    order_id: 1,
-                    price: 1000,
-                },
-                {
-                    order_id: 2,
-                    price: 2000,
-                }
-            ]
+            data:[]
+        }
+    },
+    mounted(){
+        this.getHistory()
+    },
+    methods:{
+        getHistory(){
+            let email = {
+                email: localStorage.getItem("email")
+            }
+            axios
+            .post("http://localhost:9002/history", email)
+            .then((res) => {
+                this.data = res.data.history
+                console.log(this.data)
+            })
         }
     }
 }
