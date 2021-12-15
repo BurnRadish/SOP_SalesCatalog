@@ -34,36 +34,20 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-    //update quantity
+    //update product
     @CrossOrigin(origins = "http://localhost:8080")
-    @RequestMapping(value = "/product/updateQ/{id}/{quantity}", method = RequestMethod.GET)
-    public String updateProductQuantity(@PathVariable("id") String id, @PathVariable("quantity") int quantity) {
+    @RequestMapping(value = "/product/update/{id}/{quantity}/{price}", method = RequestMethod.GET)
+    public String updateProductQuantity(@PathVariable("id") String id, @PathVariable("quantity") int quantity, @PathVariable("price") int price) {
         Product product = productService.getProductId(id);
         if (product != null){
             product.setQuantity(quantity);
-            productService.updateProduct(product);
-            return "Update product quantity complete";
-        }
-        else {
-            return "Product not found";
-        }
-
-    }
-
-    //update price
-    @CrossOrigin(origins = "http://localhost:8080")
-    @RequestMapping(value = "/product/updateP/{id}/{price}", method = RequestMethod.GET)
-    public String updateProductPrice(@PathVariable("id") String id, @PathVariable("price") int price) {
-        Product product = productService.getProductId(id);
-        if (product != null){
             product.setPrice(price);
             productService.updateProduct(product);
-            return "Update product price complete";
+            return "Update product complete";
         }
         else {
             return "Product not found";
         }
-
 
     }
 
