@@ -99,6 +99,7 @@ export default {
           .post('http://localhost:9004/auth/login', { email: this.email, password: this.password})
           .then((res) => {
             localStorage.setItem("Token", res.data.accessToken)
+            localStorage.setItem("email", res.data.email)
             console.log(res)
           })
     },
