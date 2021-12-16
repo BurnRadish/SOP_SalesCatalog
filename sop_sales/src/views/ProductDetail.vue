@@ -93,7 +93,7 @@ export default {
         this.Cart = JSON.parse(localStorage.getItem("Cart"))
       },
       goBack(){
-        this.$router.push({ path: `/Catalog` });
+        this.$router.push({ path: `/` });
       },
       addtoCart(){
         this.addItem={
