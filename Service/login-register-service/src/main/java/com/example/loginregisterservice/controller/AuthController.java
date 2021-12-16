@@ -2,8 +2,8 @@ package com.example.loginregisterservice.controller;
 
 import com.example.loginregisterservice.entities.AuthRequest;
 import com.example.loginregisterservice.entities.AuthResponse;
-import com.example.loginregisterservice.entities.RegisterResponse;
 import com.example.loginregisterservice.services.AuthService;
+import com.example.loginregisterservice.entities.RegisterResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -16,6 +16,10 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 @Service
 public class AuthService {
     private final JwtUtil jwt;
@@ -40,7 +44,7 @@ public class AuthService {
                         .build();
                 String accessToken = jwt.generate(user, "ACCESS");
 
-                return new AuthResponse(accessToken);
+                return new AuthResponse(accessToken, doc.getString("email"), doc.getString("role"));
             }
             return null;
         } catch (Exception e){
@@ -58,6 +62,8 @@ public class AuthService {
                         .append("id", new ObjectId())
                         .append("email", authRequest.getEmail())
                         .append("wallet", 0)
+                        .append("role", "member")
+                        .append("address", new ArrayList<>())
                         .append("password", authRequest.getPassword()));
                 System.out.println("Success! Inserted document id: " + result.getInsertedId());
                 return new RegisterResponse(true);
