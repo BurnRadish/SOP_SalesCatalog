@@ -60,16 +60,6 @@ export default {
         addItem: {},
     };
   },
-  mounted() {
-    if (localStorage.getItem('Products')){
-      try {
-        this.objCart = JSON.parse(localStorage.getItem('Products'));
-      } catch(e){
-        localStorage.removeItem('Products');
-      }
-    }
-    
-  },
   created(){
     this.getProductDetail(this.$route.params.id);
   },
