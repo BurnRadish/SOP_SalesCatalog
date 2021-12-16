@@ -90,8 +90,9 @@ export default {
             newAddress:''
       }
   },
+
   created() {
-    console.log(this.address[0].name)
+    this.email = localStorage.getItem("email")
     this.selectAddress.name = this.address[0].name
     this.selectAddress.phone = this.address[0].phone
     this.selectAddress.address = this.address[0].address
