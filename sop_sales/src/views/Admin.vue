@@ -11,9 +11,9 @@
             <div class="px-3 py-2">
               <nav class="mb-3">
                 <b-nav vertical>
-                  <b-nav-item active @click="hide">Product</b-nav-item>
-                  <b-nav-item href="#link-1" @click="hide">Setting</b-nav-item>
-                  <b-nav-item href="#link-2" @click="hide">Logout</b-nav-item>
+                  <b-nav-item active>Product</b-nav-item>
+                  <b-nav-item href="#link-1">Setting</b-nav-item>
+                  <b-nav-item href="#link-2">Logout</b-nav-item>
                 </b-nav>
               </nav>
             </div>
