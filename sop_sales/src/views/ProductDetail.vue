@@ -56,9 +56,8 @@ export default {
     return {
         amount: 0,
         productDetail : {},
-        Arrcart:{},
-        objCart:[],
-        Cart: null
+        Cart: [],
+        addItem: {},
     };
   },
   mounted() {
@@ -69,10 +68,10 @@ export default {
         localStorage.removeItem('Products');
       }
     }
+    
   },
   created(){
     this.getProductDetail(this.$route.params.id);
-    
   },
   methods:{
       setAmount : function(how){
@@ -95,19 +94,61 @@ export default {
           this.productDetail = res.data
         }))
       },
+      setCart(){
+        this.Cart = JSON.parse(localStorage.getItem("Cart"))
+      },
       goBack(){
         this.$router.push({ path: `/Catalog` });
       },
       addtoCart(){
-        if(!this.Cart) {
-          this.Cart = {
-          Products: this.productDetail,
-          Amounts: this.amount};
-          return;
+        this.addItem={
+          id : this.productDetail._id,
+          name : this.productDetail.name,
+          description : this.productDetail.description,
+          price : this.productDetail.price,
+          quantity : this.productDetail.quantity,
+          urlimage : this.productDetail.urlimage,
+          group : this.productDetail.group,
+          amounts: this.amount,
         }
-        this.objCart.push(this.Cart);
+        let count = 0
         
-        this.saveCart();
+        if(this.Cart.length > 0){
+          
+          console.log("---this is cart---")
+          console.log(this.Cart)
+          for (var i=0; i<=this.Cart.length; i++){
+            //ติดตรงนี้รันผ่านเพิ่มซ่ำได้แต่เพิ่มใหม่ไม่ได้ cannot read error
+            if(this.Cart[i].id === this.productDetail._id){
+              console.log("found same id")
+              this.Cart[i].amounts += this.amount
+              console.log(this.Cart[i].amounts)
+              console.log(this.Cart)
+              localStorage.setItem("Cart", JSON.stringify(this.Cart))
+              count++
+              console.log(count)
+            }
+          }
+          //ติด error จะสิ้นจุดนี้ ไม่เพิ่ม item ใหม่
+          /* console.log("---This is count after loop---")
+          console.log(count)
+          if(count == 0){
+            
+            this.Cart.push(this.addItem)
+            localStorage.setItem("Cart", JSON.stringify(this.Cart))
+          } */
+        }
+        console.log("---This is count after loop---")
+        console.log(count)
+        if(count == 0){
+            this.setCart()
+            this.Cart.push(this.addItem)
+            localStorage.setItem("Cart", JSON.stringify(this.Cart))
+          }
+          
+        /* this.objCart.push(this.Cart); */
+        
+        /* this.saveCart(); */
         // // let i = []
         // this.objCart = JSON.parse(localStorage.getItem("Product"))
         // this.Arrcart = {
@@ -120,10 +161,10 @@ export default {
         // localStorage.setItem("Product", JSON.stringify(this.objCart))
         // // this.objCart = localStorage.getItem("Product")
       },
-      saveCart(){
+      /* saveCart(){
         const parsed = JSON.stringify(this.objCart);
         localStorage.setItem('Products', parsed)
-      }
+      } */
   },
 };
 </script>

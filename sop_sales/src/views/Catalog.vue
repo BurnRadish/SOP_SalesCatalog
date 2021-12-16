@@ -196,6 +196,12 @@ export default {
   },
   mounted(){
     this.getStock()
+    if(localStorage.getItem("Cart") != null){
+      console.log("Cart already created")
+    }
+    else{
+       localStorage.setItem("Cart", JSON.stringify([]))
+    }
   }
   ,
   methods:{

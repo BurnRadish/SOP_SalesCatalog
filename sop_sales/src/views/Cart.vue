@@ -4,10 +4,10 @@
                 <h1>This is Cart</h1>
                 <div>
                     <b-row>
-                        <b-button href="#" variant="primary"> Chect OUT  <b-icon icon="cart-check"> </b-icon></b-button>
+                        <b-button href="#" variant="primary" @click="goCheckout()"> Chect OUT  <b-icon icon="cart-check"> </b-icon></b-button>
                         <b-col
-                        v-for="(item, index) in Stock" 
-                        :key="index" 
+                        v-for="(item, index) in cart"
+                        :key="index"
                         cols="3" 
                         class="mb-2">
                             <b-card
@@ -15,7 +15,7 @@
                                 style="height: 100%"
                                 >
                                 <b-card-img
-                                :src="item.Urlimage"
+                                :src="'https://' + item.urlimage"
                                 img-alt="Card image"
                                 img-top 
                                 alt="Image"
@@ -39,7 +39,6 @@
                                 </b-card-text>
                             </b-card>
                         </b-col>
-                         
                     </b-row>
                     
                 </div>
@@ -62,8 +61,17 @@ export default {
         }
     },
     methods: {
-        
+        setCart(){
+            this.cart = JSON.parse(localStorage.getItem("Cart")) 
+            console.log(this.cart)
+        },
+        goCheckout(){
+            this.$router.push({ path: `/checkout/${this.cart}` });
+        }
     },
+    created(){
+        this.setCart()
+    }
 };
 </script>
 
