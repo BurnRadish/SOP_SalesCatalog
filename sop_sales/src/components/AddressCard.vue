@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../plugin/axios'
 import Swal from 'sweetalert2'
 export default {
   name: "AddressCard",
@@ -108,7 +108,7 @@ export default {
             address: this.newAddress
         }
         axios
-        .post("http://localhost:9003/information/new", data)
+        .post("/information/new", data)
         .then((res) => {
             if(res.data === true){
                 console.log("Success")

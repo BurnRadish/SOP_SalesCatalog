@@ -1,7 +1,6 @@
 package com.example.personaldataservice.controller;
 
 import com.example.personaldataservice.entities.AddNewPersonalRequest;
-import com.example.personaldataservice.entities.PersonalRequest;
 import com.example.personaldataservice.entities.PersonalResponse;
 import com.example.personaldataservice.service.PersonalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("http://localhost:8080")
-@RequestMapping(value = "/address")
+@RequestMapping(value = "/information")
 public class PersonalController {
     private PersonalService personalService;
 
@@ -19,9 +17,9 @@ public class PersonalController {
         this.personalService = personalService;
     }
 
-    @PostMapping(value = "")
-    public ResponseEntity<PersonalResponse> address(@RequestBody PersonalRequest request){
-        return ResponseEntity.ok(personalService.find(request));
+    @GetMapping(value = "")
+    public ResponseEntity<PersonalResponse> address(@RequestHeader String email){
+        return ResponseEntity.ok(personalService.find(email));
     }
 
     @PostMapping(value = "/new")

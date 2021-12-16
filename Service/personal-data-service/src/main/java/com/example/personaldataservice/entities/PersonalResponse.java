@@ -12,5 +12,5 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class PersonalResponse {
-    private List<Object> history;
+    private List<Object> information;
 }

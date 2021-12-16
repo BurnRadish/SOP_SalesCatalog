@@ -73,7 +73,7 @@
                     <b-card-text :class="'text-danger mb-2'">
                       {{ item.price }}฿
                     </b-card-text>
-                      <b-button variant="outline-warning"  @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม <b-icon  animation="cylon" icon='arrow-right'></b-icon></b-button>
+                    <a class="card-link" @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม</a>
                   </b-card-body>
                 </b-card>
               </b-col>
@@ -129,9 +129,8 @@
                     <b-card-text :class="'text-danger mb-2'">
                       {{ item.price }}฿
                     </b-card-text>
-                    <!-- <a class="card-link" @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม</a> -->
-                      <b-button variant="outline-warning"  @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม <b-icon  animation="cylon" icon='arrow-right'></b-icon></b-button>                
-                    </b-card-body>
+                    <a class="card-link" @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม</a>
+                  </b-card-body>
                 </b-card>
               </b-col>
             </b-row>
@@ -171,7 +170,7 @@
                     <b-card-text :class="'text-danger mb-2'">
                       {{ item.price }}฿
                     </b-card-text>
-                    <b-button variant="outline-warning"  @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม <b-icon  animation="cylon" icon='arrow-right'></b-icon></b-button>
+                    <a class="card-link" @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม</a>
                   </b-card-body>
                 </b-card>
               </b-col>
@@ -207,7 +206,7 @@ export default {
   ,
   methods:{
     getStock(){
-      axios.get("http://localhost:4000/product")
+      axios.get("http://localhost:9005/product")
       .then((res)=>{
         this.Cloths = res.data.filter((item) => item.group === "cloths")
         this.Accessories = res.data.filter((item) => item.group === "Accessories")
@@ -218,7 +217,7 @@ export default {
     },
     searchStock(){
       if(this.searchHolder != ''){
-        axios.get("http://localhost:4000/product/" + this.searchHolder)
+        axios.get("http://localhost:9005/product/" + this.searchHolder)
         .then((res)=>{
           console.log(res.data)
           this.SearchResult = res.data

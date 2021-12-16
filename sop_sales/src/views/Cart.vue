@@ -1,11 +1,6 @@
 <template>
 <!-- ตะกร้า -->
         <b-container fluid="xl">
-            <b-button size="lg" variant="outline-secondary" class="mb-2" @click="goBack()">
-             Go back
-                <b-icon icon="square"></b-icon>
-                 <b-icon icon="arrow-left"  animation="cylon"></b-icon>
-            </b-button>
                 <h1>This is Cart</h1>
                 <div>
                     <b-row>
@@ -40,13 +35,8 @@
                                 </b-card-text>
                             </div>
                                 <b-card-text :class="'text-danger mb-2'">
-                                    <div class="mr-auto p-3" >
-                                      {{ item.price }} ฿
-                                        <b-button @click="delInCart(index)" variant="danger" style="float:right"> <b-icon  icon="trash" ></b-icon></b-button>
-                                    </div>
+                                {{ item.price }}฿
                                 </b-card-text>
-                            
-                                
                             </b-card>
                         </b-col>
                     </b-row>
@@ -67,12 +57,10 @@ export default {
             // Real Cart
             cart:[],
 
+
         }
     },
     methods: {
-        goBack(){
-        this.$router.push({ path: `/Catalog` });
-         },
         setCart(){
             this.cart = JSON.parse(localStorage.getItem("Cart")) 
             console.log(this.cart)
@@ -80,16 +68,6 @@ export default {
         goCheckout(){
             localStorage.setItem("Cart", JSON.stringify(this.cart))
             this.$router.push({ path: `/checkout` });
-        },
-        delInCart(i){
-            console.log('this is '+ i)
-            this.cart.splice(i,1);
-            this.saveCart()
-        },
-        saveCart(){
-            const parsed = JSON.stringify(this.cart);
-            localStorage.setItem('Cart', parsed);
-            console.log(this.cart)
         }
     },
     created(){
@@ -105,4 +83,3 @@ export default {
   font-family: 'Prompt', sans-serif;
 }
 </style>
-

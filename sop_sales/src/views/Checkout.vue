@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import axios from "axios"
+import axios from "../plugin/axios"
 import ItemsList from "../components/ItemsList.vue"
 import AddressCard from "../components/AddressCard.vue"
 export default {
@@ -88,11 +88,9 @@ export default {
     methods:{
         getAddress(){
             axios
-            .post("http://localhost:9003/information", {email:this.email})
+            .get("/information")
             .then((res) => {
-                console.log(res)
                 this.address = res.data.information[0][0].address
-                console.log(this.address)
             })
         },
     }

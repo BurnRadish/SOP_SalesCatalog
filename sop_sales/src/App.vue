@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-  <!-- <b-navbar toggleable="lg" type="dark" variant="warning" v-if="$route.name !== 'Login' && $route.name !== 'Regis' && $route.name !== 'Checkout'&& $route.name !== 'History'&& $route.name !== 'HistoryDetail'">
+  <!--<b-navbar toggleable="lg" type="dark" variant="info" v-if="$route.name !== 'Login' && $route.name !== 'Regis' && $route.name !== 'Checkout'&& $route.name !== 'History'&& $route.name !== 'HistoryDetail'">
     <b-navbar-brand href="#">NavBar</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -35,9 +35,10 @@
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
-  </b-navbar> -->
+  </b-navbar>-->
 
   <router-view :key="$route.fullPath" />
+
   </div>
 </template>
 
@@ -50,7 +51,4 @@ export default {
 </script>
 
 <style>
-body {
-  background-image: url('https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg');
-}
 </style>
