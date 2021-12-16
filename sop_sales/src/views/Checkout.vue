@@ -136,9 +136,9 @@ export default {
         console.log("Click confirm")
       let data = {
         tran: this.items,
-        address: 'somewhere ยิงโดยหน้าบ้าน',
-        price: this.total,
-        email: 'SuperAmpamp@gmail.com',
+        address: 'somewhere ยิงโดยหน้าบ้าน2',
+        resultprice: this.total,
+        email: 'SuperAmpamp2@gmail.com',
       };
 
       axios
