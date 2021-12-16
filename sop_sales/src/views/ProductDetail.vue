@@ -51,6 +51,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2'
 export default {
   data() {
     return {
@@ -104,7 +105,10 @@ export default {
         let count = 0
         
         if(this.amount == 0){
-          alert("You have to add 1 or greater")
+          Swal.fire({
+            icon:'warning',
+            text:'You have to add 1 or greater'
+          })
           return 0;
         }
         else {
