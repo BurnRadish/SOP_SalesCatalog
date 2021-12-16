@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import axios from "axios"
 import ItemsList from "../components/ItemsList.vue"
 import AddressCard from "../components/AddressCard.vue"
 export default {
@@ -71,6 +72,7 @@ export default {
             change: false,
             payment: "wallet",
             total: 0,
+            email:'',
             address: [
                 {
                     id: 1,
@@ -110,9 +112,22 @@ export default {
         }
     },
     mounted(){
+        this.getAddress()
         for(let i = 0; i < this.items.length; i++){
             this.total += this.items[i].price*this.items[i].quantity
         }
+    },
+    methods:{
+        getAddress(){
+            this.email = localStorage.getItem("email")
+            axios
+            .post("http://localhost:9003/address", {email:this.email})
+            .then((res) => {
+                console.log(res)
+                this.address = res.data.history[0][0].address
+                console.log(this.address)
+            })
+        },
     }
 };
 </script>

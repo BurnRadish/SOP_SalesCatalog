@@ -82,6 +82,7 @@
 
 <script>
 import axios from "axios";
+import Swal from 'sweetalert2'
 export default {
   name: "Card",
   props: {
@@ -107,6 +108,24 @@ export default {
       axios
           .post('http://localhost:9004/auth/register', { email: this.email, password: this.password})
           .then((res) => {
+            if(res.data.success === true){
+              Swal.fire({
+                    icon: 'success',
+                    title: 'Success!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.$router.push('login')
+                    } else {
+                        this.$router.push('login')
+                    }
+              })
+            } else {
+              Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Your email is already used',
+                })
+            }
             console.log(res.data.success)
           })
     }
