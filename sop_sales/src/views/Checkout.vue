@@ -98,10 +98,10 @@ export default {
     },
     mounted(){
         this.getAddress()
-        for(let i = 0; i < this.items.length; i++){
-            this.total += this.items[i].price*this.items[i].quantity
-        }
         this.items = JSON.parse(localStorage.getItem("Cart"))
+         for(let i = 0; i < this.items.length; i++){
+            this.total += this.items[i].price*this.items[i].amounts
+        }
     },
     methods:{
         getAddress(){
