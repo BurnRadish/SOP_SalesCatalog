@@ -101,6 +101,16 @@ export default {
           .then((res) => {
             localStorage.setItem("Token", res.data.accessToken)
             localStorage.setItem("email", res.data.email)
+            if(res.status === 200){
+              this.$router.push('Catalog')
+            } else {
+              Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Your email or password is incorrect',
+              })
+            }
+
             console.log(res)
           })
     },
@@ -124,7 +134,7 @@ export default {
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Your email is already used',
-                })
+              })
             }
             console.log(res.data.success)
           })
