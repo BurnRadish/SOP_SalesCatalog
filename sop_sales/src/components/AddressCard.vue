@@ -111,7 +111,7 @@ export default {
             address: this.newAddress
         }
         axios
-        .post("http://localhost:9003/address/new", data)
+        .post("http://localhost:9003/information/new", data)
         .then((res) => {
             console.log(res)
             if(res.data === true){
