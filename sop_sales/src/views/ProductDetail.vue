@@ -66,7 +66,7 @@ export default {
       try {
         this.objCart = JSON.parse(localStorage.getItem('Products'));
       } catch(e){
-        localStorage.removeItem('cats');
+        localStorage.removeItem('Products');
       }
     }
   },
