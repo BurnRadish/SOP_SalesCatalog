@@ -11,7 +11,7 @@
           <b-row class="mt-5" v-for="(item) in data" :key="item.id">
               <b-col cols="6">
                   <img
-                    :src="item.url"
+                    :src="'https://'+ item.urlimage"
                     alt=""
                     width="50"
                     height="50"
@@ -20,8 +20,8 @@
                   <h5 class="ml-5" style="display: inline-block; margin-left: 2%">{{item.name}}</h5>
               </b-col>
               <b-col cols="2">{{item.price}}</b-col>
-              <b-col cols="2">{{item.quantity}}</b-col>
-              <b-col cols="2">{{item.price*item.quantity}}</b-col>
+              <b-col cols="2">{{item.amounts}}</b-col>
+              <b-col cols="2">{{item.price*item.amounts}}</b-col>
           </b-row>
       </div>
       

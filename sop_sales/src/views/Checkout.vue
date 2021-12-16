@@ -93,22 +93,7 @@ export default {
                     address: "625  WHITNEY RANCH HENDERSON NV 89014-2628 USA"
                 }
             ],
-            items: [
-                {
-                    id: 1,
-                    name: "ถุงยาง",
-                    price: 99,
-                    quantity: 3,
-                    url: "https://medthai.com/images/2015/10/%E0%B8%96%E0%B8%B8%E0%B8%87%E0%B8%A2%E0%B8%B2%E0%B8%87.jpg"
-                },
-                {
-                    id: 2,
-                    name: "กางเกงในใจเกเร",
-                    price: 999,
-                    quantity: 1,
-                    url: "https://cf.shopee.co.th/file/969e0b7969e7c88add4931893caf4657"
-                },
-            ]
+            items: []
         }
     },
     mounted(){
@@ -116,6 +101,7 @@ export default {
         for(let i = 0; i < this.items.length; i++){
             this.total += this.items[i].price*this.items[i].quantity
         }
+        this.items = JSON.parse(localStorage.getItem("Cart"))
     },
     methods:{
         getAddress(){
