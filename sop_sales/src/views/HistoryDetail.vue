@@ -31,11 +31,14 @@
                             <b-col cols="11">การชำระเงินทั้งหมด</b-col>
                             <b-col>{{total + 10}}</b-col>
                         </b-row>
+                      <b-row>
+                        <b-col cols="6">ที่อยู่ในการจัดส่ง</b-col>
+                        <b-col><p style="float: right;margin-right: 1%">{{address}}</p></b-col>
+                      </b-row>
                     </div>
                 </b-media>
             </b-card>
         </div>
-        
     </div>
 </template>
 
@@ -49,12 +52,8 @@ export default {
     data(){
         return{
             total: 0,
+            address:'',
             data: []
-        }
-    },
-    mounted(){
-        for(let i = 0; i < this.items.length; i++){
-            this.total += this.items[i].price*this.items[i].quantity
         }
     },
     created() {
@@ -69,8 +68,9 @@ export default {
             .post(`http://localhost:9002/history/${id}`, email)
             .then((res) => {
                 console.log(res)
-                this.data = res.data.history.item
-                this.total = res.data.history.total
+                this.data = res.data.history.tran
+                this.total = res.data.history.priceResult
+                this.address = res.data.history.address
             })
         }
     }

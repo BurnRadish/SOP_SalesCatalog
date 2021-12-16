@@ -11,7 +11,7 @@
           <b-row class="mt-5" v-for="(item) in data" :key="item.id">
               <b-col cols="6">
                   <img
-                    :src="'https://'+ item.urlimage"
+                    :src="'https://' + item.urlimage"
                     alt=""
                     width="50"
                     height="50"
