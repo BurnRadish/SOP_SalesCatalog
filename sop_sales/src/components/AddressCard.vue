@@ -90,11 +90,11 @@ export default {
             newAddress:''
       }
   },
-  mounted(){
-        this.selectAddress.name = this.address[0].name
-        this.selectAddress.phone = this.address[0].phone
-        this.selectAddress.address = this.address[0].address
-        this.email = localStorage.getItem("email")
+  created() {
+    console.log(this.address[0].name)
+    this.selectAddress.name = this.address[0].name
+    this.selectAddress.phone = this.address[0].phone
+    this.selectAddress.address = this.address[0].address
   },
   methods:{
     reset(){
