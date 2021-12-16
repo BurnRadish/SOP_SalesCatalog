@@ -17,6 +17,7 @@ import org.json.*;
 
 @Service
 public class SendTo {
+    private int count = (int) (Math.random()*100000);
     String uri = "mongodb+srv://admin:1234@cluster0.jyc4d.mongodb.net";
     @RabbitListener(queues = "OrderQueues")
     public void result(transaction result){
@@ -35,7 +36,8 @@ public class SendTo {
                     .append("tran", result.getTran())//obj.getJSONArray("tran"))
                     .append("address", result.getAddress())//obj.getString("address"))
                     .append("email", result.getEmail())//obj.getString("email"))
-                    .append("price", result.getResultprice())
+                    .append("priceResult", result.getResultprice())
+                    .append("id", this.count)
             );
             MongoCollection<Document> collection2 = database.getCollection("Product");
             for(int i=0;i<result.getTran().toArray().length;i++){

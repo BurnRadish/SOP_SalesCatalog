@@ -22,8 +22,8 @@
                         </b-row>
                         <div v-for="(items, i) in data" :key="i">
                             <b-row class="mt-5" v-for="(item, j) in items" :key="j">
-                                <b-col cols="6"><a :href='"/history/"+ item.orderId ' >No.{{item.orderId}}</a></b-col>
-                                <b-col cols="3">{{item.total}}</b-col>
+                                <b-col cols="6"><a :href='"/history/"+ item.id ' >Order ID: {{item.id}}</a></b-col>
+                                <b-col cols="3">{{item.priceResult}}</b-col>
                                 <b-col cols="3"><p style="float:right;margin-right:15%">สำเร็จ</p></b-col>
                             </b-row>
                         </div>
@@ -43,7 +43,7 @@ export default {
             data:[]
         }
     },
-    mounted(){
+  mounted(){
         this.getHistory()
     },
     methods:{

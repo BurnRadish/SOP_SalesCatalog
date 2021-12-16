@@ -23,9 +23,10 @@ public class HistoryService {
         List<Object> data = new ArrayList<>();
         try (MongoClient mongoClient = MongoClients.create(uri)){
             MongoDatabase database = mongoClient.getDatabase("Account");
-            MongoCollection<Document> collection = database.getCollection("History");
+            MongoCollection<Document> collection = database.getCollection("transaction");
             MongoCursor<Document> cursor = collection.find(eq("email", historyRequest.getEmail())).iterator();
             while (cursor.hasNext()) {
+//                System.out.println(cursor.next());
                 data.add(Arrays.asList(cursor.next()));
             }
             return new HistoryResponse(data);
@@ -35,8 +36,11 @@ public class HistoryService {
     public HistoryDetailResponse findDetail(HistoryRequest historyRequest, int id){
         try (MongoClient mongoClient = MongoClients.create(uri)){
             MongoDatabase database = mongoClient.getDatabase("Account");
-            MongoCollection<Document> collection = database.getCollection("History");
-            Document doc = collection.find(and(eq("email", historyRequest.getEmail()), eq("orderId", id))).first();
+            MongoCollection<Document> collection = database.getCollection("transaction");
+            Document doc = collection.find(and(eq("email", historyRequest.getEmail()), eq("id", id))).first();
+            System.out.println(historyRequest.getEmail());
+            System.out.println(id);
+            System.out.println(doc);
             return new HistoryDetailResponse(doc);
         }
     }

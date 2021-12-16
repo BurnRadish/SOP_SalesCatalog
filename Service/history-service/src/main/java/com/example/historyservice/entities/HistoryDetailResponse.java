@@ -1,6 +1,5 @@
 package com.example.historyservice.entities;
 
-import com.mongodb.DBObject;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

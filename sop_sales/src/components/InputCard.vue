@@ -101,8 +101,9 @@ export default {
           .then((res) => {
             localStorage.setItem("Token", res.data.accessToken)
             localStorage.setItem("email", res.data.email)
+            localStorage.setItem("role", res.data.role)
             if(res.status === 200){
-              this.$router.push('Catalog')
+              this.$router.push('/')
             } else {
               Swal.fire({
                     icon: 'error',
