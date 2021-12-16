@@ -79,7 +79,7 @@ export default {
         },
         goCheckout(){
             localStorage.setItem("Cart", JSON.stringify(this.cart))
-            this.$router.push({ path: `/checkout/${this.cart}` });
+            this.$router.push({ path: `/checkout` });
         },
         delInCart(i){
             console.log('this is '+ i)
