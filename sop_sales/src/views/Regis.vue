@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!--Header-->
+    <!-- Header -->
     <div style="height: 6em;">
       <div style="padding-top: 1.5%" class="container">
         <img

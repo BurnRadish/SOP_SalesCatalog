@@ -6,8 +6,12 @@
   >
     <div class="mb-3" style="background: #ffff">
       <b-button size="lg"  class="mb-2" @click="goBack()">
-        <b-icon animation="cylon" icon="box-arrow-in-left" aria-hidden="true">
-        </b-icon>
+        <!-- <b-iconstack > -->
+         <b-icon icon="square"></b-icon>
+         <b-icon icon="arrow-left"  animation="cylon"></b-icon>
+         <!-- </b-iconstack> -->
+        <!-- <b-icon animation="cylon" icon="box-arrow-in-left" aria-hidden="true">
+        </b-icon> -->
         Go back
       </b-button>
         <b-row>
@@ -36,7 +40,7 @@
                     จำนวนคงเหลือ : {{productDetail.quantity}}
                 </p>
                 <b-button variant="warning"  @click="addtoCart">
-                    <b-icon icon="cart-plus-fill" font-scale="1.5">
+                    <b-icon icon="cart-plus-fill" font-scale="1.5" animation="throb">
                         
                     </b-icon>
                     <span>เพิ่มลงตะกร้าสินค้า</span>

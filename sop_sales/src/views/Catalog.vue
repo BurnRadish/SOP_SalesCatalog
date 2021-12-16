@@ -73,7 +73,7 @@
                     <b-card-text :class="'text-danger mb-2'">
                       {{ item.price }}฿
                     </b-card-text>
-                    <a class="card-link" @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม</a>
+                      <b-button variant="outline-warning"  @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม <b-icon  animation="cylon" icon='arrow-right'></b-icon></b-button>
                   </b-card-body>
                 </b-card>
               </b-col>
@@ -129,8 +129,9 @@
                     <b-card-text :class="'text-danger mb-2'">
                       {{ item.price }}฿
                     </b-card-text>
-                    <a class="card-link" @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม</a>
-                  </b-card-body>
+                    <!-- <a class="card-link" @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม</a> -->
+                      <b-button variant="outline-warning"  @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม <b-icon  animation="cylon" icon='arrow-right'></b-icon></b-button>                
+                    </b-card-body>
                 </b-card>
               </b-col>
             </b-row>
@@ -170,7 +171,7 @@
                     <b-card-text :class="'text-danger mb-2'">
                       {{ item.price }}฿
                     </b-card-text>
-                    <a class="card-link" @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม</a>
+                    <b-button variant="outline-warning"  @click="viewDetail(item._id)">ดูรายละเอียดเพิ่มเติม <b-icon  animation="cylon" icon='arrow-right'></b-icon></b-button>
                   </b-card-body>
                 </b-card>
               </b-col>

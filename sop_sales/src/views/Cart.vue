@@ -3,8 +3,8 @@
         <b-container fluid="xl">
             <b-button size="lg"  class="mb-2" @click="goBack()">
              Go back
-             <b-icon animation="cylon" icon="box-arrow-in-left" aria-hidden="true">
-            </b-icon>
+                <b-icon icon="square"></b-icon>
+                 <b-icon icon="arrow-left"  animation="cylon"></b-icon>
             </b-button>
                 <h1>This is Cart</h1>
                 <div>
