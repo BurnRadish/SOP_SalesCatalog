@@ -103,53 +103,59 @@ export default {
         }
         let count = 0
         
-        if(this.Cart.length > 0){
-          
-          console.log("---this is cart---")
-          console.log(this.Cart)
-          for (var i=0; i<=this.Cart.length; i++){
-            //ติดตรงนี้รันผ่านเพิ่มซ่ำได้แต่เพิ่มใหม่ไม่ได้ cannot read error
-            if(this.Cart[i].id === this.productDetail._id){
-              console.log("found same id")
-              this.Cart[i].amounts += this.amount
-              console.log(this.Cart[i].amounts)
-              console.log(this.Cart)
-              localStorage.setItem("Cart", JSON.stringify(this.Cart))
-              count++
-              console.log(count)
+        if(this.amount == 0){
+          alert("You have to add 1 or greater")
+          return 0;
+        }
+        else {
+          if(this.Cart.length > 0){
+
+            console.log("---this is cart---")
+            console.log(this.Cart)
+            for (var i=0; i<=this.Cart.length; i++){
+              //ติดตรงนี้รันผ่านเพิ่มซ่ำได้แต่เพิ่มใหม่ไม่ได้ cannot read error
+              if(this.Cart[i].id === this.productDetail._id){
+                console.log("found same id")
+                this.Cart[i].amounts += this.amount
+                console.log(this.Cart[i].amounts)
+                console.log(this.Cart)
+                localStorage.setItem("Cart", JSON.stringify(this.Cart))
+                count++
+                console.log(count)
+              }
             }
+            //ติด error จะสิ้นจุดนี้ ไม่เพิ่ม item ใหม่
+            /* console.log("---This is count after loop---")
+            console.log(count)
+            if(count == 0){
+
+              this.Cart.push(this.addItem)
+              localStorage.setItem("Cart", JSON.stringify(this.Cart))
+            } */
           }
-          //ติด error จะสิ้นจุดนี้ ไม่เพิ่ม item ใหม่
-          /* console.log("---This is count after loop---")
+          console.log("---This is count after loop---")
           console.log(count)
           if(count == 0){
-            
-            this.Cart.push(this.addItem)
-            localStorage.setItem("Cart", JSON.stringify(this.Cart))
-          } */
-        }
-        console.log("---This is count after loop---")
-        console.log(count)
-        if(count == 0){
-            this.setCart()
-            this.Cart.push(this.addItem)
-            localStorage.setItem("Cart", JSON.stringify(this.Cart))
-          }
-          
-        /* this.objCart.push(this.Cart); */
+              this.setCart()
+              this.Cart.push(this.addItem)
+              localStorage.setItem("Cart", JSON.stringify(this.Cart))
+            }
+          } 
+          /* this.objCart.push(this.Cart); */
+
+          /* this.saveCart(); */
+          // // let i = []
+          // this.objCart = JSON.parse(localStorage.getItem("Product"))
+          // this.Arrcart = {
+          //   Product:this.productDetail,
+          //   Amount :this.amount
+          // }
+          // // i.push(this.Arrcart)
+          // this.objCart.push(this.Arrcart)
+          // console.log("Hello world "+ JSON.stringify(this.productDetail))
+          // localStorage.setItem("Product", JSON.stringify(this.objCart))
+          // // this.objCart = localStorage.getItem("Product")
         
-        /* this.saveCart(); */
-        // // let i = []
-        // this.objCart = JSON.parse(localStorage.getItem("Product"))
-        // this.Arrcart = {
-        //   Product:this.productDetail,
-        //   Amount :this.amount
-        // }
-        // // i.push(this.Arrcart)
-        // this.objCart.push(this.Arrcart)
-        // console.log("Hello world "+ JSON.stringify(this.productDetail))
-        // localStorage.setItem("Product", JSON.stringify(this.objCart))
-        // // this.objCart = localStorage.getItem("Product")
       },
       /* saveCart(){
         const parsed = JSON.stringify(this.objCart);
