@@ -83,6 +83,7 @@ export default {
             email:'',
             address: [],
             wallet: 0,
+            navWallet: 0,
             selectAddress:{
               name:'',
               phone:'',
@@ -132,7 +133,10 @@ export default {
                       if (result.isConfirmed) {
                         //ใส่เงื่อนไขตรงนี้ pushhh
                         localStorage.setItem("Cart", JSON.stringify([]))
-                        this.$router.push({path: `/`});
+                        this.navWallet = localStorage.getItem("wallet")
+                        this.navWallet = this.navWallet-this.total
+                        localStorage.setItem("wallet", this.navWallet)
+                        location.replace("http://localhost:8080")
                       }
                     })
                   }

@@ -73,7 +73,6 @@ export default {
     email: function(val){
         console.log("watch new 1 "+val + "watch old 2 "+ val)
         this.login = !this.login
-
     },
   },
   methods: {
