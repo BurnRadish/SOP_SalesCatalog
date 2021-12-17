@@ -1,14 +1,13 @@
 <template>
   <div id="app">
   <b-navbar toggleable="lg" type="light" variant="warning" v-if="$route.name !== 'Login' && $route.name !== 'Regis' && $route.name !== 'Checkout'&& $route.name !== 'History'&& $route.name !== 'HistoryDetail'">
-    <div style="padding-right:30px"> </div>
+    <div style="padding-right:100px"> </div>
     <b-navbar-brand to="/" class="py-2">SHOP</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-    <b-collapse id="nav-collapse" is-nav>
+    <div style="padding-right: 70%"> </div>
+    <b-collapse id="nav-collapse" is-nav right>
       <b-navbar-nav>
-        <b-nav-item to="/">Home</b-nav-item>
         <b-nav-item to="Cart" >Cart</b-nav-item>
         <b-nav-item to="Checkout">Checkout</b-nav-item>
         <div v-if="role === 'admin'" >
@@ -20,13 +19,14 @@
 
       <b-navbar-nav class="ml-auto"  style="float: right;">
 
-        <b-nav-item-dropdown right v-if="login === true">
+        <b-nav-item-dropdown v-if="login === true" class="dropleft">
 
           <template #button-content>
             <em>User</em>
           </template>
               <b-dropdown-text > สถานนะ :{{ role }} </b-dropdown-text>
               <b-dropdown-text > User: {{ email }} </b-dropdown-text>
+              <b-dropdown-item @click="$router.push({ path: `/history`})">History</b-dropdown-item>
               <b-dropdown-item @click="signOut">Sign Out</b-dropdown-item>
 
               <!-- <b-dropdown-item @click="signIn">Sign in</b-dropdown-item> -->
