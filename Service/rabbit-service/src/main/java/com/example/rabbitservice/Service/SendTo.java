@@ -29,9 +29,18 @@ public class SendTo {
         //JsonObject obj = new JsonObject((String) result.getTran().get(0));
         System.out.println(obj.getJSONArray("tran").getJSONObject(0).getString("name"));
         System.out.println(obj.getJSONArray("tran").getJSONObject(0).getInt("amounts"));
+        System.out.println(obj.getDouble("resultprice"));
         try{
             MongoClient mongoClient = MongoClients.create(uri);
             MongoDatabase database = mongoClient.getDatabase("Account");
+            MongoCollection<Document> collectionButFirst = database.getCollection("role");
+            Document query2 = new Document().append("email",  result.getEmail());
+            Document doc = collectionButFirst.find(eq("email", result.getEmail())).first();
+            Bson update = Updates.combine(
+                    Updates.set("wallet", doc.getInteger("wallet") - obj.getDouble("resultprice")));
+            UpdateOptions option = new UpdateOptions().upsert(true);
+            collectionButFirst.updateOne(query2, update, option);
+
             MongoCollection<Document> collection = database.getCollection("transaction");
             collection.insertOne(new Document()
                     .append("tran", result.getTran())//obj.getJSONArray("tran"))
@@ -40,6 +49,7 @@ public class SendTo {
                     .append("priceResult", result.getResultprice())
                     .append("id", this.count)
             );
+
             MongoCollection<Document> collection2 = database.getCollection("Product");
             for(int i=0;i<result.getTran().toArray().length;i++){
                 Document col = collection2.find(eq("name", obj.getJSONArray("tran").getJSONObject(i).getString("name"))).first();
