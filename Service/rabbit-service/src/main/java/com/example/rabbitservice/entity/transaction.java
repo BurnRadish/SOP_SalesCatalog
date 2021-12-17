@@ -8,6 +8,6 @@ import java.util.ArrayList;
 public class transaction implements Serializable {
     private ArrayList<Object> tran;
     private String address;
-    private double resultprice;
+    private double resultPrice;
     private String email;
 }
