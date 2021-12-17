@@ -31,7 +31,7 @@
 
               <!-- <b-dropdown-item @click="signIn">Sign in</b-dropdown-item> -->
         </b-nav-item-dropdown>
-        <div v-if="!login">
+        <div v-else>
             <b-button variant="success" @click="signIn">Sign in </b-button>
         </div>
         
@@ -48,12 +48,13 @@
 <script>
 
 
+
 export default {
   name: 'App',
   data() {
       return{
-        email:'',
-        role:'',
+        email:null,
+        role:null,
         login: false
       }
   },
@@ -62,21 +63,20 @@ export default {
     this.role = localStorage.getItem("role")
     console.log("helo "+this.email)
     console.log("helo2 "+this.role)
-    this.login = true;
   },
   // mounted() {
   // },
-  // watch:{
-  //   email: function(val, oldval){
-  //       console.log("watch new 1 "+val + "watch old 2 "+ oldval)
-  //       this.email = val
-  //   },
-  // },
+  watch:{
+    email: function(val){
+        console.log("watch new 1 "+val + "watch old 2 "+ val)
+        this.login = !this.login
+
+    },
+  },
   methods: {
     signOut(){
       localStorage.clear();
       // this.$router.push({ path: `/`})
-      this.login = false;
       this.email = '';
       this.role = '';
     },
