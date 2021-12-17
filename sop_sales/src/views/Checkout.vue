@@ -11,7 +11,7 @@
       <h1 style="margin-left: 5%; font-size: 24px; color: white; margin-top: 0.5%">Avenger Assemble | ทำการสั่งซื้อ</h1>
     </div>
     <div class="container">
-        <AddressCard :address="address"></AddressCard>
+        <AddressCard :address="address" @changeTitle="ChangeT($event)"></AddressCard>
         <ItemsList :data="items"></ItemsList>
 
   <b-card class="mt-4 ">
@@ -75,6 +75,11 @@ export default {
             total: 0,
             email:'',
             address: [],
+            selectAddress:{
+              name:'',
+              phone:'',
+              address:''
+            },
             items: []
         }
     },
@@ -98,9 +103,9 @@ export default {
           console.log("Click confirm")
           let data = {
             tran: this.items,
-            address: 'somewhere ยิงโดยหน้าบ้าน2',
+            address: this.selectAddress.address,
             resultprice: this.total,
-            email: 'SuperAmpamp2@gmail.com',
+            email: this.email,
           };
           axios
               .post("/finish", data)
@@ -122,8 +127,19 @@ export default {
                   })
                 }
               })
+      },
+      ChangeT(address)
+      {
+        this.selectAddress = address;
       }
-    }
+    },
+  watch:{
+      address: function (){
+        this.selectAddress.name = this.address[0].name
+        this.selectAddress.phone = this.address[0].phone
+        this.selectAddress.address = this.address[0].address
+      }
+  }
 };
 </script>
 
