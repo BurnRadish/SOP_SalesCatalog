@@ -1,13 +1,16 @@
 <template>
   <div style="height: 6em; background-color: #ee4d2d">
     <div style="padding-top: 1.5%" class="container">
-      <img
-        src="../assets/avg-wh.png"
-        alt=""
-        width="50"
-        height="50"
-        style="position: absolute"
-      />
+      <a href="/">
+        <img
+            src="../assets/avg-wh.png"
+            alt=""
+            width="50"
+            height="50"
+            style="position: absolute"
+        />
+      </a>
+
       <h1 style="margin-left: 5%; font-size: 24px; color: white; margin-top: 0.5%">Avenger Assemble | ทำการสั่งซื้อ</h1>
     </div>
     <div class="container">
