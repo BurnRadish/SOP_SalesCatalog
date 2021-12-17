@@ -1,11 +1,11 @@
 <template>
   <div id="app">
   <b-navbar toggleable="lg" type="light" variant="warning" v-if="$route.name !== 'Login' && $route.name !== 'Regis' && $route.name !== 'Checkout'&& $route.name !== 'History'&& $route.name !== 'HistoryDetail'">
-    <div style="padding-right:100px"> </div>
+    <div style="padding-right:8%"> </div>
     <b-navbar-brand to="/" class="py-2">SHOP</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-    <div style="padding-right: 70%"> </div>
+    <div style="padding-right: 65%"> </div>
     <b-collapse id="nav-collapse" is-nav right>
       <b-navbar-nav>
         <b-nav-item v-if="login === true">{{ wallet }}</b-nav-item>

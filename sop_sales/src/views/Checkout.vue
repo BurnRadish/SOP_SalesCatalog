@@ -110,43 +110,51 @@ export default {
             })
         },
         confirmOrder() {
-          if(this.wallet >= this.total){
-            console.log("Click confirm")
-            let data = {
-              tran: this.items,
-              address: this.selectAddress.address,
-              resultPrice: this.total,
-              email: this.email,
-            };
-            axios
-                .post("/finish", data)
-                .then((res) => {
-                  console.log(res);
-                  if (res.status === 200) {
-                    Swal.fire({
-                      icon: "success",
-                      title: "สั่งซื้อสำเร็จ",
-                      text: "ชำระเงินเสร็จแล้ว รอการติดต่อจากทางร้านได้เลย!!",
-                      confirmButtonText: "กลับไปหน้าหลัก",
-                    }).then((result) => {
-                      /* Read more about isConfirmed, isDenied below */
-                      if (result.isConfirmed) {
-                        //ใส่เงื่อนไขตรงนี้ pushhh
-                        localStorage.setItem("Cart", JSON.stringify([]))
-                        this.navWallet = localStorage.getItem("wallet")
-                        this.navWallet = this.navWallet-this.total
-                        localStorage.setItem("wallet", this.navWallet)
-                        location.replace("http://localhost:8080")
-                      }
-                    })
-                  }
-                })
-          } else {
+          if(this.selectAddress.name == '' && this.selectAddress.phone == '' && this.selectAddress.address == ''){
             Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text:'Your money in wallet is not enough'
+              icon: "error",
+              title: "Oops..",
+              text: "Please select address",
             })
+          } else {
+            if(this.wallet >= this.total){
+              console.log("Click confirm")
+              let data = {
+                tran: this.items,
+                address: this.selectAddress.address,
+                resultPrice: this.total,
+                email: this.email,
+              };
+              axios
+                  .post("/finish", data)
+                  .then((res) => {
+                    console.log(res);
+                    if (res.status === 200) {
+                      Swal.fire({
+                        icon: "success",
+                        title: "สั่งซื้อสำเร็จ",
+                        text: "ชำระเงินเสร็จแล้ว รอการติดต่อจากทางร้านได้เลย!!",
+                        confirmButtonText: "กลับไปหน้าหลัก",
+                      }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                          //ใส่เงื่อนไขตรงนี้ pushhh
+                          localStorage.setItem("Cart", JSON.stringify([]))
+                          this.navWallet = localStorage.getItem("wallet")
+                          this.navWallet = this.navWallet-this.total
+                          localStorage.setItem("wallet", this.navWallet)
+                          location.replace("http://localhost:8080")
+                        }
+                      })
+                    }
+                  })
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text:'Your money in wallet is not enough'
+              })
+            }
           }
       },
       ChangeT(address)
