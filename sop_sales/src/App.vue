@@ -51,4 +51,7 @@ export default {
 </script>
 
 <style>
+body {
+  background-image: url('https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg');
+}
 </style>
