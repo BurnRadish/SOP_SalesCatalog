@@ -124,7 +124,8 @@ export default {
                   console.log("Success")
                   Swal.fire({
                     icon: 'success',
-                    title: 'Success!'
+                    title: 'Success!',
+                    confirmButtonColor: '#3085d6',
                   }).then((result) => {
                     if (result.isConfirmed) {
                       document.location.reload(true)
