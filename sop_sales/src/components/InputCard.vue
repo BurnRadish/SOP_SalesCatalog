@@ -39,8 +39,8 @@
       >
       <center class="mt-2">
         <b-form-text
-          >ลืมรหัสผ่านงั้นหรอ
-          <a href="/register" style="text-decoration: none; color: #ee4d2d">สมัครใหม่</a> สิ555555</b-form-text
+          >ลืมรหัสผ่าน?
+          <a href="/register" style="text-decoration: none; color: #ff7e33">สมัครใหม่</a></b-form-text
         >
       </center>
     </b-card>
@@ -182,19 +182,19 @@ export default {
 .regis{
     background-color:white; 
     color: black;
-    border-color: #ee4d2d;
+    border-color: #ff7e33;
 }
 .regis:hover{
-    background-color: #ee4d2d;
+    background-color: #ff7e33;
     color: white;
-    border-color: #ee4d2d;
+    border-color: #ff7e33;
 }
 .login{
-    background-color: #ee4d2d;
-    border-color: #ee4d2d;
+    background-color: #ff7e33;
+    border-color: #ff7e33;
     color: white;
 }
 .login:hover{
-    background-color: #ee2900;
+    background-color: #ff7e33;
 }
 </style>

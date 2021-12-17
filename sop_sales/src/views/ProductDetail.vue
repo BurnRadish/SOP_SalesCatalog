@@ -1,16 +1,17 @@
 <template>
   <b-container
     fluid="xl"
-    v-bind:style="{ background: 'linear-gradient(45deg, red, yellow)' }"
+   
     style="overflow: hidden; padding-top: 20px"
   >
-    <div class="mb-3" style="background: #ffff">
-      <b-button size="lg" class="m-2" @click="goBack()">
+    <div class="mb-3" style="background: #ffff; border: 2px solid ;
+  border-radius: 10px 50px;">
+      <b-button size="lg" class="m-2" @click="goBack()" variant="dark">
         <b-icon animation="cylon" icon="box-arrow-in-left" aria-hidden="true">
         </b-icon>
         Go back
       </b-button>
-      <b-row>
+      <b-row style="margin: 10px;">
         <b-col cols="4">
           <b-img thumbnail fluid :src="'https://' + productDetail.urlimage">
           </b-img>

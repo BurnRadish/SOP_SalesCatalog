@@ -14,7 +14,7 @@
       </div>
     </div>
     <!--Content-->
-    <div style="height: 86.5vh; background-color: #ee4d2d">
+    <div style="height: 86.5vh; background-color: #ff7e33">
       <div class="container">
         <b-row>
           <b-col cols="7" class="mt-5">
