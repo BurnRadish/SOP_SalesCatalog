@@ -37,19 +37,36 @@
                 <b-td>{{ item.name }}</b-td>
                 <b-td>{{ item.quantity }}</b-td>
                 <b-td>{{ item.price }}</b-td>
-                <b-td><b-button v-b-modal="modal(index)" v-on:click="assign(index)">Edit</b-button></b-td>
+                <b-td
+                  ><b-button v-b-modal="modal(index)" v-on:click="assign(index)"
+                    >Edit</b-button
+                  ></b-td
+                >
               </b-tr>
             </b-thead>
           </b-table-simple>
-          <div v-for="(item,index) in data" :key="index">
+          <div v-for="(item, index) in data" :key="index">
             <b-modal :id="'modal-' + index" title="Form Detail">
-                <h3 class="text-center">{{item.name}}</h3>
-                <label>Name</label>
-                <b-form-input v-model="pro_name" :placeholder=item.name></b-form-input>
-                <label>Quantity</label>
-                <b-form-input v-model="pro_quan" :placeholder=item.quantity></b-form-input>
-                <label>Price</label>
-                <b-form-input v-model="pro_price" :placeholder=item.price></b-form-input>
+              <h3 class="text-center">{{ item.name }}</h3>
+              <label>Quantity</label>
+              <b-form-input
+                v-model="pro_quan"
+                :placeholder="item.quantity"
+              ></b-form-input>
+              <label>Price</label>
+              <b-form-input
+                v-model="pro_price"
+                :placeholder="item.price"
+              ></b-form-input>
+              <template #modal-footer="{ cancel, ok }">
+                <!-- Emulate built in modal footer ok and cancel button actions -->
+                <b-button size="sm" variant="success" @click="ok()" v-on:click="Edit()">
+                  OK
+                </b-button>
+                <b-button size="sm" variant="danger" @click="cancel()">
+                  Cancel
+                </b-button>
+              </template>
             </b-modal>
           </div>
         </b-card>
@@ -64,9 +81,10 @@ export default {
   data() {
     return {
       data: [],
-      pro_name:"",
-      pro_quan:0,
-      pro_price:0
+      pro_name: "",
+      pro_quan: 0,
+      pro_price: 0,
+      pro_id: "",
       // Note `isActive` is left out and will not appear in the rendered table
     };
   },
@@ -74,11 +92,29 @@ export default {
     modal(i) {
       return "modal-" + i;
     },
-    assign(i){
-        this.pro_name = this.data[i].name;
-        this.pro_quan = this.data[i].quantity;
-        this.pro_price = this.data[i].price
-    }
+    assign(i) {
+      this.pro_quan = this.data[i].quantity;
+      this.pro_price = this.data[i].price;
+      this.pro_id = this.data[i]._id;
+    },
+    Edit() {
+      console.log(this.pro_id);
+      axios
+        .get(
+          "http://localhost:4000/product/update/" +
+            this.pro_id +
+            "/" +
+            this.pro_quan +
+            "/" +
+            this.pro_price
+        )
+        .then(() => {
+          axios.get("http://localhost:4000/product/").then((res) => {
+            this.data = res.data;
+            console.log(this.data);
+          });
+        });
+    },
   },
   created() {
     axios.get("http://localhost:4000/product/").then((res) => {
