@@ -29,7 +29,7 @@ public class SendTo {
         //JsonObject obj = new JsonObject((String) result.getTran().get(0));
         System.out.println(obj.getJSONArray("tran").getJSONObject(0).getString("name"));
         System.out.println(obj.getJSONArray("tran").getJSONObject(0).getInt("amounts"));
-        System.out.println(obj.getDouble("resultprice"));
+        System.out.println(obj.getDouble("resultPrice"));
         try{
             MongoClient mongoClient = MongoClients.create(uri);
             MongoDatabase database = mongoClient.getDatabase("Account");
@@ -37,7 +37,7 @@ public class SendTo {
             Document query2 = new Document().append("email",  result.getEmail());
             Document doc = collectionButFirst.find(eq("email", result.getEmail())).first();
             Bson update = Updates.combine(
-                    Updates.set("wallet", doc.getInteger("wallet") - obj.getDouble("resultprice")));
+                    Updates.set("wallet", doc.getDouble("wallet") - obj.getDouble("resultPrice")));
             UpdateOptions option = new UpdateOptions().upsert(true);
             collectionButFirst.updateOne(query2, update, option);
 
@@ -46,7 +46,7 @@ public class SendTo {
                     .append("tran", result.getTran())//obj.getJSONArray("tran"))
                     .append("address", result.getAddress())//obj.getString("address"))
                     .append("email", result.getEmail())//obj.getString("email"))
-                    .append("priceResult", result.getResultprice())
+                    .append("priceResult", result.getResultPrice())
                     .append("id", this.count)
             );
 
