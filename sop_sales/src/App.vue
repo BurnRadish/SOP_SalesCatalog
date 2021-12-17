@@ -1,7 +1,8 @@
 <template>
   <div id="app">
   <b-navbar toggleable="lg" type="light" variant="warning" v-if="$route.name !== 'Login' && $route.name !== 'Regis' && $route.name !== 'Checkout'&& $route.name !== 'History'&& $route.name !== 'HistoryDetail'">
-    <b-navbar-brand to="/" class="mb-0">SHOP</b-navbar-brand>
+    <div style="padding-right:30px"> </div>
+    <b-navbar-brand to="/" class="py-2">SHOP</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -24,8 +25,8 @@
           <template #button-content>
             <em>User</em>
           </template>
-              <b-dropdown-text > {{ role }} </b-dropdown-text>
-              <b-dropdown-text > {{ email }} </b-dropdown-text>
+              <b-dropdown-text > สถานนะ :{{ role }} </b-dropdown-text>
+              <b-dropdown-text > User: {{ email }} </b-dropdown-text>
               <b-dropdown-item @click="signOut">Sign Out</b-dropdown-item>
 
               <!-- <b-dropdown-item @click="signIn">Sign in</b-dropdown-item> -->

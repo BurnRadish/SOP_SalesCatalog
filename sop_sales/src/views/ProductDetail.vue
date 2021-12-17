@@ -5,7 +5,7 @@
     style="overflow: hidden;padding-top:20px"
   >
     <div class="mb-3" style="background: #ffff">
-      <b-button size="lg"  class="mb-2" @click="goBack()">
+      <b-button size="lg"  class="m-2" @click="goBack()">
         <b-icon animation="cylon" icon="box-arrow-in-left" aria-hidden="true">
         </b-icon>
         Go back
@@ -36,7 +36,7 @@
                     จำนวนคงเหลือ : {{productDetail.quantity}}
                 </p>
                 <b-button variant="warning"  @click="addtoCart">
-                    <b-icon icon="cart-plus-fill" font-scale="1.5">
+                    <b-icon icon="cart-plus-fill" animation="throb" font-scale="1.5">
                         
                     </b-icon>
                     <span>เพิ่มลงตะกร้าสินค้า</span>
