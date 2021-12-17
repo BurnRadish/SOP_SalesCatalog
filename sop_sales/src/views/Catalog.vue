@@ -183,7 +183,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../plugin/axios";
 export default {
   data() {
     return {
@@ -206,7 +206,7 @@ export default {
   ,
   methods:{
     getStock(){
-      axios.get("http://localhost:9005/product")
+      axios.get("/product")
       .then((res)=>{
         this.Cloths = res.data.filter((item) => item.group === "cloths")
         this.Accessories = res.data.filter((item) => item.group === "Accessories")
@@ -217,7 +217,7 @@ export default {
     },
     searchStock(){
       if(this.searchHolder != ''){
-        axios.get("http://localhost:9005/product/" + this.searchHolder)
+        axios.get("/product/" + this.searchHolder)
         .then((res)=>{
           console.log(res.data)
           this.SearchResult = res.data

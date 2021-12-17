@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../plugin/axios';
 export default {
   data() {
     return {
@@ -88,7 +88,7 @@ export default {
           }
       },
       getProductDetail(id){
-        axios.get("http://localhost:9005/productDetail/" + id)
+        axios.get("/productDetail/" + id)
         .then((res=>{
           console.log(res.data)
           this.productDetail = res.data

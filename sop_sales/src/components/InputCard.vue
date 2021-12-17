@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../plugin/axios";
 import Swal from 'sweetalert2'
 export default {
   name: "Card",
@@ -97,7 +97,7 @@ export default {
   methods:{
     login(){
       axios
-          .post('http://localhost:3001/auth/login', { email: this.email, password: this.password})
+          .post('/auth/login', { email: this.email, password: this.password})
           .then((res) => {
             localStorage.setItem("Token", res.data.accessToken)
             localStorage.setItem("email", res.data.email)
@@ -117,7 +117,7 @@ export default {
     },
     register(){
       axios
-          .post('http://localhost:9004/auth/register', { email: this.email, password: this.password})
+          .post('/auth/register', { email: this.email, password: this.password})
           .then((res) => {
             if(res.data.success === true){
               Swal.fire({

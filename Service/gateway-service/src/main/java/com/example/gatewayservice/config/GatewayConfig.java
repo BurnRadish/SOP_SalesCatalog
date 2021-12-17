@@ -27,9 +27,13 @@ public class GatewayConfig {
                         .filters(f -> f.filter(filter))
                         .uri("lb://history-service")
                 )
-                .route("product-service", r -> r.path("/product/**")
+                .route("product-service", r -> r.path("/product/**", "/create/**", "/delete/**", "/productDetail/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://product-service")
+                )
+                .route("rabbit-service", r -> r.path("/finish/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://rabbit-service")
                 )
                 .build();
     }

@@ -22,7 +22,7 @@
          </b-row>
          <b-row>
              <b-col>
-                  <input type="radio" class="mt-4" name="select2" checked disabled value=""><label for="select2" style="padding-left: 10px">GOS Wallet</label>
+                  <input type="radio" class="mt-4" name="select2" checked disabled value=""><label style="padding-left: 10px">GOS Wallet</label>
              </b-col>
          </b-row>
       </div>
@@ -51,7 +51,7 @@
              </div>
         </b-media>
     </b-card>
-    <b-button class="login w-25 mt-4" style="float:right">Confirm</b-button>
+    <b-button class="login w-25 mt-4" style="float:right" @click="confirmOrder()">Confirm</b-button>
   </b-card>
 
     </div>
@@ -62,6 +62,7 @@
 import axios from "../plugin/axios"
 import ItemsList from "../components/ItemsList.vue"
 import AddressCard from "../components/AddressCard.vue"
+import Swal from "sweetalert2";
 export default {
     components:{
         ItemsList,
@@ -93,6 +94,35 @@ export default {
                 this.address = res.data.information[0][0].address
             })
         },
+        confirmOrder() {
+          console.log("Click confirm")
+          let data = {
+            tran: this.items,
+            address: 'somewhere ยิงโดยหน้าบ้าน2',
+            resultprice: this.total,
+            email: 'SuperAmpamp2@gmail.com',
+          };
+          axios
+              .post("/finish", data)
+              .then((res) => {
+                console.log(res);
+                if (res.status === 200) {
+                  Swal.fire({
+                    icon: "success",
+                    title: "สั่งซื้อสำเร็จ",
+                    text: "ชำระเงินเสร็จแล้ว รอการติดต่อจากทางร้านได้เลย!!",
+                    confirmButtonText: "กลับไปหน้าหลัก",
+                  }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                      //ใส่เงื่อนไขตรงนี้ pushhh
+                      localStorage.setItem("Cart", JSON.stringify([]))
+                      this.$router.push({path: `/`});
+                    }
+                  })
+                }
+              })
+      }
     }
 };
 </script>
