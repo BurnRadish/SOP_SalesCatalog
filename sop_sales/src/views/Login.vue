@@ -10,11 +10,11 @@
           height="50"
           style="position: absolute"
         />
-        <h1 style="margin-left: 5%; font-size: 40px">Avenger Assemble</h1>
+        <h1 style="margin-left: 5%; font-size: 40px">GOS shop&sales</h1>
       </div>
     </div>
     <!--Content-->
-    <div style="height: 86.5vh; background-color: #ee4d2d">
+    <div style="height: 86.5vh; background-color: #ff7e33">
       <div class="container">
         <b-row>
           <b-col cols="7" class="mt-5">
