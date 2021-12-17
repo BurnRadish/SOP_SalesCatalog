@@ -44,19 +44,23 @@
           <b-row class="m-2" >
               <b-col>
                     <label>ชื่อผู้รับ</label>
-                    <b-form-input type="text" placeholder="กรอกชื่อผู้รับ" required v-model="name"></b-form-input>
+                    <b-form-input type="text" placeholder="กรอกชื่อผู้รับ" required v-model="name" :state="addressState" aria-describedby="input-live-help"></b-form-input>
               </b-col>
               <b-col>
                     <label>เบอร์ติดต่อ</label>
-                    <b-form-input type="text" placeholder="กรอกชื่อเบอร์โทรศัพท์ที่สามารถติดต่อได้" required v-model="phone"></b-form-input>
+                    <b-form-input type="text" placeholder="กรอกชื่อเบอร์โทรศัพท์ที่สามารถติดต่อได้" :state="addressState" aria-describedby="input-live-help" required v-model="phone"></b-form-input>
               </b-col>
           </b-row>
           <b-row class="m-2">
                 <b-col>
                     <label>สถานที่จัดส่ง</label>
-                    <b-form-input type="text" placeholder="กรอกที่อยู่" required v-model="newAddress"></b-form-input>
-              </b-col>
+                    <b-form-input type="text" placeholder="กรอกที่อยู่" :state="addressState" aria-describedby="input-live-help" required v-model="newAddress"></b-form-input>
+                  <b-form-invalid-feedback id="input-live-help">
+                    Please fill in all fields
+                  </b-form-invalid-feedback>
+                </b-col>
           </b-row>
+
           <div class="mt-3">
               <center>
                 <b-button class="regis w-25" @click="reset, change = false, addNew = false">Cancel</b-button>
@@ -90,9 +94,14 @@ export default {
             newAddress:''
       }
   },
- created() {
+  created() {
     this.email = localStorage.getItem("email")
- },
+  },
+  computed: {
+    addressState() {
+      return this.name.length > 0 && this.phone.length > 0 && this.newAddress.length > 0 ? true : false
+    },
+  },
   methods:{
     reset(){
         this.change = false
@@ -101,29 +110,36 @@ export default {
         this.selectAddress.address = this.address[0].address
     },
     addNewPersonal(){
-        let data = {
+        if(this.addressState === true){
+          let data = {
             email: this.email,
             name: this.name,
             phone: this.phone,
             address: this.newAddress
-        }
-        axios
-        .post("/information/new", data)
-        .then((res) => {
-            if(res.data === true){
-                console.log("Success")
-                Swal.fire({
+          }
+          axios
+              .post("/information/new", data)
+              .then((res) => {
+                if(res.data === true){
+                  console.log("Success")
+                  Swal.fire({
                     icon: 'success',
                     title: 'Success!'
-                }).then((result) => {
+                  }).then((result) => {
                     if (result.isConfirmed) {
-                        document.location.reload(true)
+                      document.location.reload(true)
                     } else {
-                        document.location.reload(true)
+                      document.location.reload(true)
                     }
-                })
-            }
-        })
+                  })
+                }
+              })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+          })
+        }
     },
     passEvent()
     {

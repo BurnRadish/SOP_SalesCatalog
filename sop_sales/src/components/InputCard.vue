@@ -48,28 +48,45 @@
     <b-card title="สมัครสมาชิก" style="max-width: 25rem" class="mb-2 mt-5" v-else>
       <b-card-text class="mt-3">
         <b-form @submit.stop.prevent>
-          <label for="text-username">Username</label>
+          <label >Username</label>
           <b-form-input
             type="text"
             id="text-username"
             placeholder="Enter your username"
             v-model="email"
+            :state="emailState"
+            aria-describedby="input-live-help"
           ></b-form-input>
+          <b-form-invalid-feedback id="input-live-help">
+            Enter at least 1 letters
+          </b-form-invalid-feedback>
 
-          <label for="text-password" class="mt-3">Password</label>
+
+          <label class="mt-3">Password</label>
           <b-form-input
             type="password"
             id="text-password"
             placeholder="Enter your password"
             v-model="password"
+            :state="passwordState"
+            aria-describedby="input-live-help2"
           ></b-form-input>
+          <b-form-invalid-feedback id="input-live-help2">
+            Password not match
+          </b-form-invalid-feedback>
 
-          <label for="text-conpassword" class="mt-3">Confirm Password</label>
+          <label class="mt-3" >Confirm Password</label>
           <b-form-input
             type="password"
             id="text-conpassword"
             placeholder="Enter your password again"
+            v-model="confirmPass"
+            :state="passwordState"
+            aria-describedby="input-live-help2"
           ></b-form-input>
+          <b-form-invalid-feedback id="input-live-help2">
+            Password not match
+          </b-form-invalid-feedback>
         </b-form>
       </b-card-text>
 
@@ -92,6 +109,15 @@ export default {
     return{
       email:'',
       password:'',
+      confirmPass:''
+    }
+  },
+  computed: {
+    emailState() {
+      return this.email.length > 0 ? true : false
+    },
+    passwordState(){
+      return this.password === this.confirmPass && this.password.length > 0 ? true : false
     }
   },
   methods:{
@@ -116,29 +142,36 @@ export default {
           })
     },
     register(){
-      axios
-          .post('/auth/register', { email: this.email, password: this.password})
-          .then((res) => {
-            if(res.data.success === true){
-              Swal.fire({
-                    icon: 'success',
-                    title: 'Success!'
+      if(this.emailState === true && this.passwordState === true){
+        axios
+            .post('/auth/register', { email: this.email, password: this.password})
+            .then((res) => {
+              if(res.data.success === true){
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Success!'
                 }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.$router.push('login')
-                    } else {
-                        this.$router.push('login')
-                    }
-              })
-            } else {
-              Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Your email is already used',
-              })
-            }
-            console.log(res.data.success)
-          })
+                  if (result.isConfirmed) {
+                    this.$router.push('login')
+                  } else {
+                    this.$router.push('login')
+                  }
+                })
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Your email is already used',
+                })
+              }
+              console.log(res.data.success)
+            })
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+        })
+      }
     }
   }
 };
