@@ -32,9 +32,13 @@
     <b-card class="mt-4">
         <b-media >
             <div>
-                <b-row>
-                    <b-col cols="11"><strong style="font-size:24px">ยอด Wallet คงเหลือ</strong></b-col>
-                    <b-col><strong style="font-size:24px">20000</strong></b-col>
+                <b-row v-if="wallet >= total">
+                    <b-col cols="11"><strong style="font-size:24px; color: lime">ยอด Wallet คงเหลือ</strong></b-col>
+                    <b-col><strong style="font-size:24px;color: lime">{{ wallet }}</strong></b-col>
+                </b-row>
+                <b-row v-else>
+                  <b-col cols="11"><strong style="font-size:24px; color: red">ยอด Wallet คงเหลือไม่เพียงพอ</strong></b-col>
+                  <b-col><strong style="font-size:24px;color: red">{{ wallet }}</strong></b-col>
                 </b-row>
                 <b-row>
                     <b-col cols="11">ยอดรวมราคาสินค้า</b-col>
@@ -75,6 +79,7 @@ export default {
             total: 0,
             email:'',
             address: [],
+            wallet: 0,
             selectAddress:{
               name:'',
               phone:'',
@@ -85,48 +90,57 @@ export default {
     },
     mounted(){
         this.email = localStorage.getItem("email")
-        this.getAddress()
+        this.getData()
         this.items = JSON.parse(localStorage.getItem("Cart"))
          for(let i = 0; i < this.items.length; i++){
             this.total += this.items[i].price*this.items[i].amounts
         }
     },
     methods:{
-        getAddress(){
+        getData(){
             axios
             .get("/information")
             .then((res) => {
+              this.wallet = res.data.information[0][0].wallet
                 this.address = res.data.information[0][0].address
             })
         },
         confirmOrder() {
-          console.log("Click confirm")
-          let data = {
-            tran: this.items,
-            address: this.selectAddress.address,
-            resultprice: this.total,
-            email: this.email,
-          };
-          axios
-              .post("/finish", data)
-              .then((res) => {
-                console.log(res);
-                if (res.status === 200) {
-                  Swal.fire({
-                    icon: "success",
-                    title: "สั่งซื้อสำเร็จ",
-                    text: "ชำระเงินเสร็จแล้ว รอการติดต่อจากทางร้านได้เลย!!",
-                    confirmButtonText: "กลับไปหน้าหลัก",
-                  }).then((result) => {
-                    /* Read more about isConfirmed, isDenied below */
-                    if (result.isConfirmed) {
-                      //ใส่เงื่อนไขตรงนี้ pushhh
-                      localStorage.setItem("Cart", JSON.stringify([]))
-                      this.$router.push({path: `/`});
-                    }
-                  })
-                }
-              })
+          if(this.wallet >= this.total){
+            console.log("Click confirm")
+            let data = {
+              tran: this.items,
+              address: this.selectAddress.address,
+              resultprice: this.total,
+              email: this.email,
+            };
+            axios
+                .post("/finish", data)
+                .then((res) => {
+                  console.log(res);
+                  if (res.status === 200) {
+                    Swal.fire({
+                      icon: "success",
+                      title: "สั่งซื้อสำเร็จ",
+                      text: "ชำระเงินเสร็จแล้ว รอการติดต่อจากทางร้านได้เลย!!",
+                      confirmButtonText: "กลับไปหน้าหลัก",
+                    }).then((result) => {
+                      /* Read more about isConfirmed, isDenied below */
+                      if (result.isConfirmed) {
+                        //ใส่เงื่อนไขตรงนี้ pushhh
+                        localStorage.setItem("Cart", JSON.stringify([]))
+                        this.$router.push({path: `/`});
+                      }
+                    })
+                  }
+                })
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text:'Your money in wallet is not enough'
+            })
+          }
       },
       ChangeT(address)
       {
