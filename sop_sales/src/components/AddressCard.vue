@@ -20,7 +20,7 @@
           <h5 class="m-2"><b-icon icon="geo-alt-fill"></b-icon> ที่อยู่ในการจัดส่ง</h5>
           <b-row class="m-2" v-for="(data, i) in address" :key="data.id">
               <b-col cols="1">
-                  <input type="radio" class="mt-4" name="select"   v-model="selectAddress" v-bind:value="{name: data.name, phone: data.phone, address: data.address}">
+                  <input type="radio" class="mt-4" name="select" @click='passEvent'  v-model="selectAddress" v-bind:value="{name: data.name, phone: data.phone, address: data.address}">
               </b-col>
               <b-col cols="3" class="mt-2">
                   <strong><p>{{i+1}}. {{data.name}}<br>{{data.phone}}</p></strong>
@@ -124,6 +124,10 @@ export default {
                 })
             }
         })
+    },
+    passEvent()
+    {
+      this.$emit('changeTitle', this.selectAddress)
     }
   },
   watch:{
@@ -131,6 +135,9 @@ export default {
       this.selectAddress.name = this.address[0].name
       this.selectAddress.phone = this.address[0].phone
       this.selectAddress.address = this.address[0].address
+    },
+    selectAddress: function (){
+      this.passEvent()
     }
   }
 }
