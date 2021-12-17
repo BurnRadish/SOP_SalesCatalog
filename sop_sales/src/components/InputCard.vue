@@ -130,6 +130,7 @@ export default {
             localStorage.setItem("role", res.data.role)
             if(res.status === 200){
               this.$router.push('/')
+              document.location.reload(true);
             } else {
               Swal.fire({
                     icon: 'error',

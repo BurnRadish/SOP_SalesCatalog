@@ -11,9 +11,9 @@
             <div class="px-3 py-2">
               <nav class="mb-3">
                 <b-nav vertical>
-                  <b-nav-item active @click="hide">Product</b-nav-item>
-                  <b-nav-item href="#link-1" @click="hide">Setting</b-nav-item>
-                  <b-nav-item href="#link-2" @click="hide">Logout</b-nav-item>
+                  <b-nav-item active>Product</b-nav-item>
+                  <b-nav-item href="#link-1">Setting</b-nav-item>
+                  <b-nav-item href="#link-2">Logout</b-nav-item>
                 </b-nav>
               </nav>
             </div>
@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../plugin/axios";
 export default {
   data() {
     return {
@@ -101,7 +101,7 @@ export default {
       console.log(this.pro_id);
       axios
         .get(
-          "http://localhost:4000/product/update/" +
+          "/product/update/" +
             this.pro_id +
             "/" +
             this.pro_quan +
@@ -109,7 +109,7 @@ export default {
             this.pro_price
         )
         .then(() => {
-          axios.get("http://localhost:4000/product/").then((res) => {
+          axios.get("/product/").then((res) => {
             this.data = res.data;
             console.log(this.data);
           });
@@ -117,7 +117,7 @@ export default {
     },
   },
   created() {
-    axios.get("http://localhost:9005/product/").then((res) => {
+    axios.get("/product/").then((res) => {
       this.data = res.data;
       console.log(this.data);
     });
