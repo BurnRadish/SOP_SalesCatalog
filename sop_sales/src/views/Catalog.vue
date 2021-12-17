@@ -58,7 +58,7 @@
                       img-top
                       alt="Image"
                       height="200"
-                      class="mb-2"
+                      class="mb-2 Card_hover"
                     >
                     </b-card-img>
                     <b-card-title>
@@ -118,7 +118,7 @@
                       img-top
                       alt="Image"
                       height="200"
-                      class="mb-2"
+                      class="mb-2 Card_hover"
                     >
                     </b-card-img>
                     <b-card-title>
@@ -161,7 +161,7 @@
                       img-top
                       alt="Image"
                       height="200"
-                      class="mb-2"
+                      class="mb-2 Card_hover"
                     >
                     </b-card-img>
                     <b-card-title >
@@ -250,4 +250,11 @@ export default {
 .main {
   font-family: "Prompt", sans-serif;
 }
+.Card_hover{
+ transition: transform .2s;  
+}
+.Card_hover:hover{
+  transform: scale(1.2);
+}
+
 </style>

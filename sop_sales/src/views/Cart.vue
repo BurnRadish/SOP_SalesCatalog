@@ -26,7 +26,7 @@
                                 alt="Image"
                                 height="200"
                                 tag="article"
-                                class="mb-2">
+                                class="mb-2 Card_hover" >
                                 </b-card-img>
                             <div style="height: 150px; padding-top: 10px">
                                 <b-card-title style="height: 50px">
@@ -101,4 +101,11 @@ export default {
 .main{
   font-family: 'Prompt', sans-serif;
 }
+.Card_hover{
+ transition: transform .2s;  
+}
+.Card_hover:hover{
+  transform: scale(1.2);
+}
+
 </style>
