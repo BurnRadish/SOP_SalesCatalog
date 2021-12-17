@@ -11,7 +11,7 @@
         />
       </a>
 
-      <h1 style="margin-left: 5%; font-size: 24px; color: white; margin-top: 0.5%">Avenger Assemble | ทำการสั่งซื้อ</h1>
+      <h1 style="margin-left: 5%; font-size: 24px; color: white; margin-top: 0.5%">GOS Shop&Sales | ทำการสั่งซื้อ</h1>
     </div>
     <div class="container">
         <AddressCard :address="address" @changeTitle="ChangeT($event)"></AddressCard>

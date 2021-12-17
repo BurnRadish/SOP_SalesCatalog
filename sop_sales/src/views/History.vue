@@ -10,7 +10,7 @@
               style="position: absolute"
           />
         </a>
-            <h1 style="margin-left: 5%; font-size: 24px; color: white; margin-top: 0.5%">Avenger Assemble | ประวัติการทำรายการ</h1>
+            <h1 style="margin-left: 5%; font-size: 24px; color: white; margin-top: 0.5%">GOS Shop&Sales | ประวัติการทำรายการ</h1>
         </div>
         <div class="container">
             <div class="mt-5">

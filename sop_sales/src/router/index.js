@@ -1,6 +1,7 @@
 
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Swal from "sweetalert2";
 
 Vue.use(VueRouter)
 
@@ -71,15 +72,56 @@ router.beforeEach((to, from, next) => {
     const admin = localStorage.getItem('role')
 
     if (to.meta.login && !isLoggedIn){
-      alert('Please login first!')
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please login first',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.$router.push('/login')
+            } else {
+                this.$router.push('/login')
+            }
+        })
       next({ path: '/login' })
     } else if (to.meta.guess && isLoggedIn){
-      alert("You've already logged in")
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'You\'ve already logged in',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.$router.push('/')
+            } else {
+                this.$router.push('/')
+            }
+        })
       next({ path: '/'})
     } else if (to.meta.member && !member){
-      alert('Please login first!')
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please login first',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.$router.push('/login')
+            } else {
+                this.$router.push('/login')
+            }
+        })
       next({ path: '/login' })
     } else if (to.meta.admin && admin !== "admin"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "You don't have permission",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.$router.push('/login')
+            } else {
+                this.$router.push('/login')
+            }
+        })
       alert("You don't have permission")
       next({ path: '/'})
     }
