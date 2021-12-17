@@ -33,12 +33,12 @@
         <b-media >
             <div>
                 <b-row v-if="wallet >= total">
-                    <b-col cols="11"><strong style="font-size:24px; color: lime">ยอด Wallet คงเหลือ</strong></b-col>
-                    <b-col><strong style="font-size:24px;color: lime">{{ wallet }}</strong></b-col>
+                    <b-col cols="11"><strong style="font-size:20px; color: lime">ยอด Wallet คงเหลือ</strong></b-col>
+                    <b-col><strong style="font-size:20px;color: lime">{{ wallet }}</strong></b-col>
                 </b-row>
                 <b-row v-else>
-                  <b-col cols="11"><strong style="font-size:24px; color: red">ยอด Wallet คงเหลือไม่เพียงพอ</strong></b-col>
-                  <b-col><strong style="font-size:24px;color: red">{{ wallet }}</strong></b-col>
+                  <b-col cols="11"><strong style="font-size:20px; color: red">ยอด Wallet คงเหลือไม่เพียงพอ</strong></b-col>
+                  <b-col><strong style="font-size:20px;color: red">{{ wallet }}</strong></b-col>
                 </b-row>
                 <b-row>
                     <b-col cols="11">ยอดรวมราคาสินค้า</b-col>
