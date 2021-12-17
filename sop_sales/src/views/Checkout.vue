@@ -111,7 +111,7 @@ export default {
             let data = {
               tran: this.items,
               address: this.selectAddress.address,
-              resultprice: this.total,
+              resultPrice: this.total,
               email: this.email,
             };
             axios
