@@ -65,6 +65,7 @@ export default {
       productDetail: {},
       Cart: [],
       addItem: {},
+      email:''
     };
   },
   mounted() {
@@ -78,6 +79,7 @@ export default {
   },
   created() {
     this.getProductDetail(this.$route.params.id);
+    this.email = localStorage.getItem("email")
   },
   methods: {
     setAmount: function (how) {
@@ -116,6 +118,19 @@ export default {
         amounts: this.amount,
       };
       let count = 0;
+      if(this.email === null){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please login first',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$router.push('/login')
+          } else {
+            this.$router.push('/login')
+          }
+        })
+      }
       if (this.Cart.length > 0) {
         for (let i = 0; i < this.Cart.length; i++) {
           if (this.Cart[i].id == this.productDetail._id) {
