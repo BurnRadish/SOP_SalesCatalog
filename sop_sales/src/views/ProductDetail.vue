@@ -123,34 +123,7 @@ export default {
             count++;
           }
         }
-        Swal.fire({
-          icon: "success",
-          title: "เพิ่มรายการสินค้าลงตะกร้าสำเร็จแล้ว!",
-          confirmButtonColor: "#3085d6",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.$router.push("/");
-          } else {
-            this.$router.push("/");
-          }
-        });
-      } else {
-        this.Cart.push(this.addItem);
-        localStorage.setItem("Cart", JSON.stringify(this.Cart));
-        Swal.fire({
-          icon: "success",
-          title: "เพิ่มรายการสินค้าลงตะกร้าสำเร็จแล้ว!",
-          confirmButtonColor: "#3085d6",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.$router.push("/");
-          } else {
-            this.$router.push("/");
-          }
-        });
-      }
-
-      if(count == 0){
+        if(count == 0){
             console.log("--Add new item--")
             this.setCart()
             this.Cart.push(this.addItem)
@@ -167,6 +140,33 @@ export default {
               }
             })
           }
+        Swal.fire({
+          icon: "success",
+          title: "เพิ่มรายการสินค้าลงตะกร้าสำเร็จแล้ว!",
+          confirmButtonColor: "#3085d6",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$router.push("/");
+          } else {
+            this.$router.push("/");
+          }
+        });
+      } else {
+        console.log("--Add first item--")
+        this.Cart.push(this.addItem);
+        localStorage.setItem("Cart", JSON.stringify(this.Cart));
+        Swal.fire({
+          icon: "success",
+          title: "เพิ่มรายการสินค้าลงตะกร้าสำเร็จแล้ว!",
+          confirmButtonColor: "#3085d6",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$router.push("/");
+          } else {
+            this.$router.push("/");
+          }
+        });
+      }
     },
   },
 };
