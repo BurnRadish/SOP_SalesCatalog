@@ -51,10 +51,11 @@
 
 <script>
 import axios from '../plugin/axios';
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
-        amount: 0,
+        amount: 1,
         productDetail : {},
         Cart: [],
         addItem: {},
@@ -144,6 +145,17 @@ export default {
             this.setCart()
             this.Cart.push(this.addItem)
             localStorage.setItem("Cart", JSON.stringify(this.Cart))
+            Swal.fire({
+              icon: 'success',
+              title: 'Success!',
+              confirmButtonColor: '#3085d6',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.$router.push('/')
+              } else {
+                this.$router.push('/')
+              }
+            })
           }
           
         /* this.objCart.push(this.Cart); */
