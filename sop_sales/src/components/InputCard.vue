@@ -128,6 +128,7 @@ export default {
             localStorage.setItem("Token", res.data.accessToken)
             localStorage.setItem("email", res.data.email)
             localStorage.setItem("role", res.data.role)
+            localStorage.setItem("wallet", res.data.wallet)
             if(res.status === 200){
               this.$router.push('/')
               document.location.reload(true);

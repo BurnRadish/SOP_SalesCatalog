@@ -44,7 +44,7 @@ public class AuthService {
                         .build();
                 String accessToken = jwt.generate(user, "ACCESS");
 
-                return new AuthResponse(accessToken, doc.getString("email"), doc.getString("role"));
+                return new AuthResponse(accessToken, doc.getString("email"), doc.getString("role"), doc.getDouble("wallet"));
             }
             return null;
         } catch (Exception e){
@@ -61,7 +61,7 @@ public class AuthService {
                 InsertOneResult result = collection.insertOne(new Document()
                         .append("id", new ObjectId())
                         .append("email", authRequest.getEmail())
-                        .append("wallet", 0)
+                        .append("wallet", 10000.0)
                         .append("role", "member")
                         .append("address", new ArrayList<>())
                         .append("password", authRequest.getPassword()));

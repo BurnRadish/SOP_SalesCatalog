@@ -8,6 +8,7 @@
     <div style="padding-right: 70%"> </div>
     <b-collapse id="nav-collapse" is-nav right>
       <b-navbar-nav>
+        <b-nav-item v-if="login === true">{{ wallet }}</b-nav-item>
         <b-nav-item to="Cart" >Cart</b-nav-item>
         <b-nav-item to="Checkout">Checkout</b-nav-item>
         <div v-if="role === 'admin'" >
@@ -55,12 +56,14 @@ export default {
       return{
         email:null,
         role:null,
-        login: false
+        login: false,
+        wallet: 0
       }
   },
   created() {
     this.email = localStorage.getItem("email")
     this.role = localStorage.getItem("role")
+    this.wallet = localStorage.getItem("wallet")
     console.log("helo "+this.email)
     console.log("helo2 "+this.role)
   },

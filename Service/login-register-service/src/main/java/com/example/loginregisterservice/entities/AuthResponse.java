@@ -13,4 +13,5 @@ public class AuthResponse {
     private String accessToken;
     private String email;
     private String role;
+    private Double wallet;
 }
