@@ -5,9 +5,9 @@
     style="overflow: hidden;padding-top:20px"
   >
     <div class="mb-3" style="background: #ffff">
-      <b-button size="lg" variant="outline-secondary"  class="mb-2" @click="goBack()">
-         <b-icon icon="square"></b-icon>
-         <b-icon icon="arrow-left"  animation="cylon"></b-icon>
+      <b-button size="lg"  class="mb-2" @click="goBack()">
+        <b-icon animation="cylon" icon="box-arrow-in-left" aria-hidden="true">
+        </b-icon>
         Go back
       </b-button>
         <b-row>
@@ -36,7 +36,7 @@
                     จำนวนคงเหลือ : {{productDetail.quantity}}
                 </p>
                 <b-button variant="warning"  @click="addtoCart">
-                    <b-icon icon="cart-plus-fill" font-scale="1.5" animation="throb">
+                    <b-icon icon="cart-plus-fill" font-scale="1.5">
                         
                     </b-icon>
                     <span>เพิ่มลงตะกร้าสินค้า</span>
@@ -50,16 +50,26 @@
 </template>
 
 <script>
-import axios from 'axios';
-import Swal from 'sweetalert2'
+import axios from '../plugin/axios';
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
-        amount: 0,
+        amount: 1,
         productDetail : {},
         Cart: [],
         addItem: {},
     };
+  },
+  mounted() {
+    if (localStorage.getItem('Products')){
+      try {
+        this.objCart = JSON.parse(localStorage.getItem('Products'));
+      } catch(e){
+        localStorage.removeItem('Products');
+      }
+    }
+    
   },
   created(){
     this.getProductDetail(this.$route.params.id);
@@ -79,7 +89,7 @@ export default {
           }
       },
       getProductDetail(id){
-        axios.get("http://localhost:4000/productDetail/" + id)
+        axios.get("/productDetail/" + id)
         .then((res=>{
           console.log(res.data)
           this.productDetail = res.data
@@ -104,62 +114,64 @@ export default {
         }
         let count = 0
         
-        if(this.amount == 0){
-          Swal.fire({
-            icon:'warning',
-            text:'You have to add 1 or greater'
-          })
-          return 0;
-        }
-        else {
-          if(this.Cart.length > 0){
-
-            console.log("---this is cart---")
-            console.log(this.Cart)
-            for (var i=0; i<=this.Cart.length; i++){
-              //ติดตรงนี้รันผ่านเพิ่มซ่ำได้แต่เพิ่มใหม่ไม่ได้ cannot read error
-              if(this.Cart[i].id === this.productDetail._id){
-                console.log("found same id")
-                this.Cart[i].amounts += this.amount
-                console.log(this.Cart[i].amounts)
-                console.log(this.Cart)
-                localStorage.setItem("Cart", JSON.stringify(this.Cart))
-                count++
-                console.log(count)
-              }
-            }
-            //ติด error จะสิ้นจุดนี้ ไม่เพิ่ม item ใหม่
-            /* console.log("---This is count after loop---")
-            console.log(count)
-            if(count == 0){
-
-              this.Cart.push(this.addItem)
+        if(this.Cart.length > 0){
+          
+          console.log("---this is cart---")
+          console.log(this.Cart)
+          for (var i=0; i<=this.Cart.length; i++){
+            //ติดตรงนี้รันผ่านเพิ่มซ่ำได้แต่เพิ่มใหม่ไม่ได้ cannot read error
+            if(this.Cart[i].id === this.productDetail._id){
+              console.log("found same id")
+              this.Cart[i].amounts += this.amount
+              console.log(this.Cart[i].amounts)
+              console.log(this.Cart)
               localStorage.setItem("Cart", JSON.stringify(this.Cart))
-            } */
+              count++
+              console.log(count)
+            }
           }
-          console.log("---This is count after loop---")
+          //ติด error จะสิ้นจุดนี้ ไม่เพิ่ม item ใหม่
+          /* console.log("---This is count after loop---")
           console.log(count)
           if(count == 0){
-              this.setCart()
-              this.Cart.push(this.addItem)
-              localStorage.setItem("Cart", JSON.stringify(this.Cart))
-            }
-          } 
-          /* this.objCart.push(this.Cart); */
-
-          /* this.saveCart(); */
-          // // let i = []
-          // this.objCart = JSON.parse(localStorage.getItem("Product"))
-          // this.Arrcart = {
-          //   Product:this.productDetail,
-          //   Amount :this.amount
-          // }
-          // // i.push(this.Arrcart)
-          // this.objCart.push(this.Arrcart)
-          // console.log("Hello world "+ JSON.stringify(this.productDetail))
-          // localStorage.setItem("Product", JSON.stringify(this.objCart))
-          // // this.objCart = localStorage.getItem("Product")
+            
+            this.Cart.push(this.addItem)
+            localStorage.setItem("Cart", JSON.stringify(this.Cart))
+          } */
+        }
+        console.log("---This is count after loop---")
+        console.log(count)
+        if(count == 0){
+            this.setCart()
+            this.Cart.push(this.addItem)
+            localStorage.setItem("Cart", JSON.stringify(this.Cart))
+            Swal.fire({
+              icon: 'success',
+              title: 'Success!',
+              confirmButtonColor: '#3085d6',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.$router.push('/')
+              } else {
+                this.$router.push('/')
+              }
+            })
+          }
+          
+        /* this.objCart.push(this.Cart); */
         
+        /* this.saveCart(); */
+        // // let i = []
+        // this.objCart = JSON.parse(localStorage.getItem("Product"))
+        // this.Arrcart = {
+        //   Product:this.productDetail,
+        //   Amount :this.amount
+        // }
+        // // i.push(this.Arrcart)
+        // this.objCart.push(this.Arrcart)
+        // console.log("Hello world "+ JSON.stringify(this.productDetail))
+        // localStorage.setItem("Product", JSON.stringify(this.objCart))
+        // // this.objCart = localStorage.getItem("Product")
       },
       /* saveCart(){
         const parsed = JSON.stringify(this.objCart);

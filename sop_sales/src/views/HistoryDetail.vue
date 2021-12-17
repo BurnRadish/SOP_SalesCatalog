@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "../plugin/axios"
 import ItemsList from "../components/ItemsList.vue"
 export default {
     components:{
@@ -61,11 +61,11 @@ export default {
     },
     methods:{
         getHistoryDetail(id){
-            let email = {
-                email: localStorage.getItem("email"),
-            }
+            // let email = {
+            //     email: localStorage.getItem("email"),
+            // }
             axios
-            .post(`http://localhost:9002/history/${id}`, email)
+            .get(`/history/${id}`)
             .then((res) => {
                 console.log(res)
                 this.data = res.data.history.tran

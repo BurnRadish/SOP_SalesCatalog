@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("http://localhost:8080")
 @RequestMapping(value = "/auth")
 public class AuthController {
     private final AuthService authService;

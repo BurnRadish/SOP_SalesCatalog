@@ -1,7 +1,6 @@
 package com.example.personaldataservice.service;
 
 import com.example.personaldataservice.entities.AddNewPersonalRequest;
-import com.example.personaldataservice.entities.PersonalRequest;
 import com.example.personaldataservice.entities.PersonalResponse;
 import com.mongodb.client.*;
 import com.mongodb.client.model.UpdateOptions;
@@ -21,12 +20,12 @@ import static com.mongodb.client.model.Filters.eq;
 public class PersonalService {
     String uri = "mongodb+srv://admin:1234@cluster0.jyc4d.mongodb.net";
 
-    public PersonalResponse find(PersonalRequest personalRequest){
+    public PersonalResponse find(String email){
         List<Object> data = new ArrayList<>();
         try (MongoClient mongoClient = MongoClients.create(uri)) {
             MongoDatabase database = mongoClient.getDatabase("Account");
             MongoCollection<Document> collection = database.getCollection("role");
-            MongoCursor<Document> cursor = collection.find(eq("email", personalRequest.getEmail())).iterator();
+            MongoCursor<Document> cursor = collection.find(eq("email", email)).iterator();
             while (cursor.hasNext()) {
                 data.add(Arrays.asList(cursor.next()));
             }
@@ -45,6 +44,7 @@ public class PersonalService {
             UpdateOptions options = new UpdateOptions().upsert(true);
             UpdateResult result = collection.updateOne(query, updates, options);
             System.out.println("Modified document count: " + result.getModifiedCount());
+            System.out.println(addNewPersonalRequest.getEmail());
             return true;
         }
     }

@@ -20,7 +20,7 @@
           <h5 class="m-2"><b-icon icon="geo-alt-fill"></b-icon> ที่อยู่ในการจัดส่ง</h5>
           <b-row class="m-2" v-for="(data, i) in address" :key="data.id">
               <b-col cols="1">
-                  <input type="radio" class="mt-4" name="select"  v-model="selectAddress" v-bind:value="{name: data.name, phone: data.phone, address: data.address}">
+                  <input type="radio" class="mt-4" name="select" @click='passEvent'  v-model="selectAddress" v-bind:value="{name: data.name, phone: data.phone, address: data.address}">
               </b-col>
               <b-col cols="3" class="mt-2">
                   <strong><p>{{i+1}}. {{data.name}}<br>{{data.phone}}</p></strong>
@@ -44,19 +44,23 @@
           <b-row class="m-2" >
               <b-col>
                     <label>ชื่อผู้รับ</label>
-                    <b-form-input type="text" placeholder="กรอกชื่อผู้รับ" required v-model="name"></b-form-input>
+                    <b-form-input type="text" placeholder="กรอกชื่อผู้รับ" required v-model="name" :state="addressState" aria-describedby="input-live-help"></b-form-input>
               </b-col>
               <b-col>
                     <label>เบอร์ติดต่อ</label>
-                    <b-form-input type="text" placeholder="กรอกชื่อเบอร์โทรศัพท์ที่สามารถติดต่อได้" required v-model="phone"></b-form-input>
+                    <b-form-input type="text" placeholder="กรอกชื่อเบอร์โทรศัพท์ที่สามารถติดต่อได้" :state="addressState" aria-describedby="input-live-help" required v-model="phone"></b-form-input>
               </b-col>
           </b-row>
           <b-row class="m-2">
                 <b-col>
                     <label>สถานที่จัดส่ง</label>
-                    <b-form-input type="text" placeholder="กรอกที่อยู่" required v-model="newAddress"></b-form-input>
-              </b-col>
+                    <b-form-input type="text" placeholder="กรอกที่อยู่" :state="addressState" aria-describedby="input-live-help" required v-model="newAddress"></b-form-input>
+                  <b-form-invalid-feedback id="input-live-help">
+                    Please fill in all fields
+                  </b-form-invalid-feedback>
+                </b-col>
           </b-row>
+
           <div class="mt-3">
               <center>
                 <b-button class="regis w-25" @click="reset, change = false, addNew = false">Cancel</b-button>
@@ -68,7 +72,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../plugin/axios'
 import Swal from 'sweetalert2'
 export default {
   name: "AddressCard",
@@ -90,45 +94,67 @@ export default {
             newAddress:''
       }
   },
-
   created() {
     this.email = localStorage.getItem("email")
-    this.selectAddress.name = this.address[0].name
-    this.selectAddress.phone = this.address[0].phone
-    this.selectAddress.address = this.address[0].address
+  },
+  computed: {
+    addressState() {
+      return this.name.length > 0 && this.phone.length > 0 && this.newAddress.length > 0 ? true : false
+    },
   },
   methods:{
     reset(){
+        this.change = false
         this.selectAddress.name = this.address[0].name
         this.selectAddress.phone = this.address[0].phone
         this.selectAddress.address = this.address[0].address
-        this.change = false
     },
     addNewPersonal(){
-        let data = {
+        if(this.addressState === true){
+          let data = {
             email: this.email,
             name: this.name,
             phone: this.phone,
             address: this.newAddress
-        }
-        axios
-        .post("http://localhost:9003/information/new", data)
-        .then((res) => {
-            console.log(res)
-            if(res.data === true){
-                console.log("Success")
-                Swal.fire({
+          }
+          axios
+              .post("/information/new", data)
+              .then((res) => {
+                if(res.data === true){
+                  console.log("Success")
+                  Swal.fire({
                     icon: 'success',
-                    title: 'Success!'
-                }).then((result) => {
+                    title: 'Success!',
+                    confirmButtonColor: '#3085d6',
+                  }).then((result) => {
                     if (result.isConfirmed) {
-                        document.location.reload(true)
+                      document.location.reload(true)
                     } else {
-                        document.location.reload(true)
+                      document.location.reload(true)
                     }
-                })
-            }
-        })
+                  })
+                }
+              })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+          })
+        }
+    },
+    passEvent()
+    {
+      this.$emit('changeTitle', this.selectAddress)
+    }
+  },
+  watch:{
+    address: function (){
+      this.selectAddress.name = this.address[0].name
+      this.selectAddress.phone = this.address[0].phone
+      this.selectAddress.address = this.address[0].address
+    },
+    selectAddress: function (){
+      this.passEvent()
     }
   }
 }

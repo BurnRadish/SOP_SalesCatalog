@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "../plugin/axios"
 export default {
     data(){
         return{
@@ -48,11 +48,11 @@ export default {
     },
     methods:{
         getHistory(){
-            let email = {
-                email: localStorage.getItem("email")
-            }
+            // let email = {
+            //     email: localStorage.getItem("email")
+            // }
             axios
-            .post("http://localhost:9002/history", email)
+            .get("/history")
             .then((res) => {
                 this.data = res.data.history
                 console.log(this.data)

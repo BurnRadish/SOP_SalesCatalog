@@ -57,7 +57,6 @@
 
 <script>
 import STOCK from "../dummy";
-
 export default {
     name:"Cart",
     data() {
@@ -66,12 +65,11 @@ export default {
             Stock: STOCK,
             // Real Cart
             cart:[],
-
         }
     },
     methods: {
         goBack(){
-        this.$router.push({ path: `/Catalog` });
+        this.$router.push({ path: `/` });
          },
         setCart(){
             this.cart = JSON.parse(localStorage.getItem("Cart")) 
@@ -100,9 +98,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
-
 .main{
   font-family: 'Prompt', sans-serif;
 }
 </style>
-
