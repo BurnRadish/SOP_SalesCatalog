@@ -9,7 +9,7 @@
                 <h1>This is Cart</h1>
                 <div>
                     <b-row>
-                        <b-button href="#" variant="primary" @click="goCheckout()"> Chect OUT  <b-icon icon="cart-check"> </b-icon></b-button>
+                        <b-button href="#" variant="primary" @click="goCheckout()" class="mb-2"> Chect OUT  <b-icon icon="cart-check"> </b-icon></b-button>
                         <b-col
                         v-for="(item, index) in cart"
                         :key="index"
