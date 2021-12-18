@@ -9,6 +9,9 @@ Projecct for SOP KMITL 2021
 npm install
 ```
 4. หลังติดตั้งเสร็จแล้วพิมพ์คำสั่ง npm run serve เพื่อ run หน้าเว็บ
+```
+npm run serve
+```
 5. รัน Service ทั้งหมดในโฟลเดอร์ Service 
 6. ทดลองใช้เว็บ !!
 
